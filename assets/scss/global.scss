@@ -1,0 +1,65 @@
+//importing of required styling
+
+@use "partials/reset";
+@use "partials/mixins" as *;
+@use "partials/functions" as *;
+@use "partials/typography";
+@import "partials/icons";
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: getColor(grey-800);
+}
+::-webkit-scrollbar-thumb {
+    background: getColor(primary-400);
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+html {
+    @include colors;
+}
+html,
+body {
+    // background: getColor(grey-900);
+    color: getColor(grey-50);
+}
+body {
+    background: getColor(grey-900);
+    background-image: url("~assets/img/bg.png");
+    background-size: 100%;
+    background-position: 50% -160px;
+    background-repeat: repeat-y;
+}
+
+a {
+    text-decoration: none;
+    color: getColor(primary-400);
+    background-color: transparent;
+}
+
+.container {
+    width: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.default-view {
+    margin-bottom: 128px;
+}
+.status-bar {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-top: -20px;
+    height: 20px;
+    position: sticky;
+    top: -20px;
+    z-index: 10;
+    background: getColor(grey-900);
+}
+.page {
+    margin-top: 40px;
+}

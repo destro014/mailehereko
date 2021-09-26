@@ -1,0 +1,29 @@
+.number-input-group {
+    margin-bottom: 24px;
+    .number-input {
+        width: 100%;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 700;
+        color: $text-primary;
+        padding: 16px;
+        outline: none;
+        border: 1px solid transparent;
+        background: $background-tertary;
+        border-radius: 16px;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        -moz-appearance: textfield;
+
+        &::placeholder {
+            color: $neutral-grey-500;
+        }
+        &:focus,
+        &:active {
+            border: 1px solid $primary-blue-500;
+        }
+    }
+}

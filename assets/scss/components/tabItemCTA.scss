@@ -1,0 +1,31 @@
+.cta {
+    flex-grow: 0;
+    position: relative;
+    justify-self: flex-start;
+    align-self: flex-start;
+    z-index: 5;
+    margin: 0 16px;
+    // box-shadow: 0 0 0 8px #091c33;
+    border-radius: 0 0 24px 24px;
+    transform: translateY(-24px);
+    .cta-left,
+    .cta-right {
+        position: absolute;
+        svg {
+            fill: #091c33;
+        }
+    }
+
+    .cta-left {
+        top: 24px;
+        left: -24px;
+    }
+    .cta-right {
+        top: 24px;
+        right: -24px;
+    }
+    .icon svg {
+        height: 48px;
+        width: 48px;
+    }
+}

@@ -1,0 +1,34 @@
+.input-group {
+    position: relative;
+    margin-bottom: 24px;
+    .input {
+        width: 100%;
+        padding: 16px 16px 16px 48px;
+        color: $text-secondary;
+        font-size: 16px;
+        line-height: 24px;
+        background: $background-secondary;
+        border: 1px solid transparent;
+        border-radius: 16px;
+        &::placeholder {
+            color: $text-tertary;
+        }
+        &:focus,
+        &:active {
+            border: 1px solid $primary-blue-500;
+        }
+    }
+    .icon {
+        position: absolute;
+    }
+    .initial-icon {
+        top: 16px;
+        left: 16px;
+    }
+    .trialing-icon {
+        cursor: pointer;
+        padding: 16px;
+        right: 0;
+        top: 0;
+    }
+}

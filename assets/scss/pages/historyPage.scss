@@ -1,0 +1,15 @@
+.history-page {
+    .nodata {
+        text-align: center;
+        margin-top: 40px;
+        color: $neutral-grey-500;
+    }
+}
+.calendar {
+    color: $text-primary;
+}
+.day-view .transaction-card {
+    .amount {
+        color: $text-primary;
+    }
+}

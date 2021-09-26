@@ -1,0 +1,20 @@
+.btn {
+    margin-top: 16px;
+    padding: 16px 32px;
+    background: $primary-blue-500;
+    border-radius: 16px;
+    width: 100%;
+    font-weight: 700;
+    color: $background-primary;
+    &:hover {
+        background: $primary-blue-400;
+    }
+}
+.btn-secondary {
+    background: $primary-blue-900;
+    color: $text-tertary;
+    &:hover {
+        background: $primary-blue-800;
+        color: $text-primary;
+    }
+}

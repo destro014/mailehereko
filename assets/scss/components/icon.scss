@@ -1,0 +1,14 @@
+.icon {
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: $neutral-grey-500;
+        display: block;
+    }
+    &.large {
+        svg {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}

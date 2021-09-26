@@ -1,0 +1,79 @@
+.day-card {
+    /* max-width: 382px; */
+    z-index: 1;
+    position: relative;
+    border-radius: 16px;
+    padding: 40px;
+    height: 240px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        opacity: 0.24;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 17px;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(245, 245, 245, 0.2) 40%,
+            rgba(255, 255, 255, 0.72) 84.1%,
+            rgba(159, 44, 253, 1) 100%
+        );
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        opacity: 1;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        border-radius: 16px;
+        background: $background-primary;
+        background: url("assets/img/card-bg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .amount-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .amount {
+        color: $text-primary;
+        line-height: 1;
+    }
+    .change {
+        fill: $text-secondary;
+        display: inline-flex;
+
+        .icon {
+            margin-right: 4px;
+        }
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+        &.has-success {
+            color: $state-success;
+            svg {
+                fill: $state-success;
+            }
+        }
+        &.has-error {
+            color: $state-danger;
+            svg {
+                fill: $state-danger;
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+.login-page {
+    display: flex;
+    height: 100%;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 160px);
+    // min-height: 420px;
+    .brand {
+        margin-bottom: 24px;
+    }
+    form {
+        margin-top: 24px;
+        width: 100%;
+        position: relative;
+    }
+    .feedback {
+        position: absolute;
+        bottom: -72px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: $text-tertary;
+        &.error {
+            color: $state-danger;
+        }
+        &.success {
+            color: $state-success;
+        }
+    }
+}

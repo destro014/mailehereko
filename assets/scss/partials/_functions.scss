@@ -1,0 +1,7 @@
+@function getColor($color-name) {
+  @return var(--#{$color-name});
+}
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
