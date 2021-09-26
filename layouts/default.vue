@@ -1,6 +1,5 @@
 <template>
   <div class="default-view container">
-    <div class="status-bar container"></div>
     <Navbar />
     <Nuxt />
     <Footer />

@@ -87,7 +87,7 @@ export default {
       },
       {
         property: 'twitter:image',
-        content: '/img/banner.jpg',
+        content: 'https://mailehereko.pramodpoudel.com.np/img/banner.jpg',
       },
     ],
     link: [
