@@ -1,5 +1,5 @@
 <template>
-  <h1>Details page</h1>
+  <h1>TV Shows name</h1>
 </template>
 
 <script>

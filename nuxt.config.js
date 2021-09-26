@@ -133,7 +133,12 @@ export default {
 
   components: true,
   components: {
-    dirs: ['~/components'],
+    dirs: [
+      '~/components',
+      '~/components/core/',
+      '~/components/layout',
+      '~/components/block',
+    ],
   },
 
   buildModules: [],
