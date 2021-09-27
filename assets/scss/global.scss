@@ -4,7 +4,6 @@
 @use "partials/mixins" as *;
 @use "partials/functions" as *;
 @use "partials/typography";
-@import "partials/icons";
 
 ::-webkit-scrollbar {
     width: 12px;
@@ -30,6 +29,7 @@ body {
     background-size: 100%;
     background-position: 50% -160px;
     background-repeat: repeat-y;
+    height: 1000vh;
 }
 
 a {
@@ -60,5 +60,21 @@ a {
     background: getColor(grey-900);
 }
 .page {
-    margin-top: 40px;
+    margin-top: 120px;
+    margin-bottom: 160px;
+}
+h1 {
+    color: getColor(grey-50);
+}
+p {
+    color: getColor(grey-400);
+}
+
+@media screen and (max-width: 1440px) {
+    body {
+        background-size: 1440px;
+    }
+    .page {
+        margin-top: 24px;
+    }
 }

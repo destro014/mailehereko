@@ -1,34 +1,98 @@
+@use "../partials/functions" as *;
 .input-group {
     position: relative;
-    margin-bottom: 24px;
-    .input {
+    background: getColor(black-10);
+    border-radius: 12px;
+    input {
+        background: transparent;
+        outline: none;
+        border: none;
+        appearance: none;
+        z-index: 3;
         width: 100%;
-        padding: 16px 16px 16px 48px;
-        color: $text-secondary;
+        padding: 28px 16px 12px 56px;
         font-size: 16px;
-        line-height: 24px;
-        background: $background-secondary;
-        border: 1px solid transparent;
-        border-radius: 16px;
+        line-height: 20px;
+        border-radius: 12px;
+        color: getColor(grey-400);
+        border: 2px solid getColor(grey-800);
+        &:focus {
+            border-color: getColor(primary-500);
+            & + label {
+                transform: translateY(-12px);
+                color: getColor(grey-400);
+            }
+
+            &::placeholder {
+                opacity: 0.4;
+            }
+        }
         &::placeholder {
-            color: $text-tertary;
+            opacity: 0;
         }
-        &:focus,
-        &:active {
-            border: 1px solid $primary-blue-500;
+        &:not(:placeholder-shown) + label {
+            transform: translateY(-12px);
+            color: getColor(grey-400);
         }
     }
-    .icon {
+    label {
         position: absolute;
+        top: 24px;
+        left: 56px;
+        font-size: 14px;
+        line-height: 16px;
+        color: getColor(grey-600);
+        transform: translateY(0);
+        transform-origin: 0%;
+        transition: transform 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: text;
     }
-    .initial-icon {
-        top: 16px;
-        left: 16px;
+    .icon-wrapper {
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        height: 24px;
+        &.left-icon {
+            left: 16px;
+        }
+        &.right-icon {
+            right: 16px;
+        }
+        svg {
+            stroke: getColor(grey-600);
+        }
     }
-    .trialing-icon {
-        cursor: pointer;
-        padding: 16px;
-        right: 0;
-        top: 0;
+    .supporting-link {
+        margin-top: 8px;
+        text-align: right;
+    }
+    .input-feedback {
+        margin-top: 4px;
+        color: getColor(grey-400);
+        p {
+            margin: 0;
+        }
+    }
+    &.has-error {
+        input {
+            border-color: getColor(error-400);
+            &:focus {
+                & + label {
+                    color: getColor(error-400);
+                }
+            }
+            &:not(:placeholder-shown) + label {
+                color: getColor(error-400);
+            }
+        }
+        label {
+            color: getColor(error-400);
+        }
+        .input-feedback p {
+            color: getColor(error-400);
+        }
+        svg {
+            fill: getColor(error-400) !important;
+        }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="default-view container">
+  <div class="default-view">
     <Navbar />
     <Nuxt />
     <Footer />

@@ -1,12 +1,17 @@
 //importing of global styling
-@import "global";
+@forward "global";
 
 //loaders
 
 // @import "components/loaders/indexLoader.scss";
-//components styles
 
-// @import "components/icon.scss";
+//components styles
+@forward "components/icon.scss";
+@forward "components/logo.scss";
+@forward "components/input.scss";
+@forward "components/segmentedControl.scss";
+@forward "components/navbar.scss";
+@forward "components/footer.scss";
 
 //pages styles
-// @import "pages/index.scss";
+@forward "pages/index.scss";

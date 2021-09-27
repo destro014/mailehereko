@@ -1,8 +1,70 @@
+@use "../partials/functions" as *;
+@use "../partials/variables" as *;
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: getColor(grey-900-80);
+    backdrop-filter: blur($blur-amount);
+}
 .navbar {
-    padding: 16px 0 16px 0;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
     .brand {
         svg {
             display: block;
         }
+    }
+    .menu-items {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        li {
+            list-style: none;
+        }
+    }
+    .nav-link {
+        display: inline-block;
+        padding: toRem(12) toRem(16);
+        color: getColor(grey-400);
+        .mh-icon {
+            margin: 0 8px;
+        }
+        &:hover {
+            color: getColor(primary-400);
+        }
+    }
+    .has-icon {
+        display: flex;
+        // justify-content: center;
+        // align-items: center;
+        padding: toRem(12) toRem(32);
+        .mh-icon {
+            transform: translateX(0px);
+            svg {
+                height: 24px;
+                width: 24px;
+            }
+        }
+        &:hover {
+            .mh-icon {
+                animation: zigzag 0.25s ease-in-out alternate 4;
+                svg {
+                    stroke: getColor(primary-400);
+                }
+            }
+        }
+    }
+}
+@keyframes zigzag {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(4px);
     }
 }

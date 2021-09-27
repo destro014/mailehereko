@@ -33,8 +33,8 @@ export default {
         name: 'apple-mobile-web-app-title',
         content: 'Maile Hereko',
       },
-      { name: 'theme-color', content: '#2C8AFD' },
-      { name: 'msapplication-TileColor', content: '#2C8AFD' },
+      { name: 'theme-color', content: '#121829' },
+      { name: 'msapplication-TileColor', content: '#121829' },
       {
         name: 'title',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',

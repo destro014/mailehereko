@@ -1,12 +1,14 @@
 <template>
-  <nav class="navbar">
-    <div class="brand"><Logo /></div>
-  </nav>
+  <footer>
+    <div class="footer container">
+      <div class="brand"><Logo /></div>
+    </div>
+  </footer>
 </template>
 
 <script>
 export default {
-  name: 'Navbar',
+  name: 'Footer',
 }
 </script>
 
