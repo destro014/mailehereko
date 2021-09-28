@@ -22,7 +22,8 @@
         <SegmentedControl />
       </div>
     </div>
-    {{ stateSearchTerm }}
+    {{ dataServer }}
+    {{ dataClient }}
   </div>
 </template>
 
@@ -39,7 +40,13 @@ export default {
   data() {
     return {
       searchTerm: null,
+      dataServer: null,
+      dataClient: null,
     }
+  },
+  async fetch() {
+    await console.log('already fetched on server')
+    this.dataServer = 'generated on server side'
   },
   watch: {
     searchTerm: function (val, oldVal) {
@@ -51,5 +58,9 @@ export default {
       return this.$store.state.search.searchTerm
     },
   }),
+  mounted() {
+    console.log('mounted')
+    this.dataClient = 'Generated on client side'
+  },
 }
 </script>

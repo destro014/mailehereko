@@ -1,5 +1,7 @@
 <template>
-  <h1>Suggest</h1>
+  <div class="suggest-page page container">
+    <h1>Suggest</h1>
+  </div>
 </template>
 
 <script>

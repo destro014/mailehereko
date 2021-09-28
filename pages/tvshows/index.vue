@@ -1,5 +1,7 @@
 <template>
-  <h1>TV Shows</h1>
+  <div class="tv-shows-page page container">
+    <h1>TV Shows</h1>
+  </div>
 </template>
 
 <script>

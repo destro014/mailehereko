@@ -1,5 +1,7 @@
 <template>
-  <h1>Movie Name</h1>
+  <div class="movie-details-page page container">
+    <h1>Movie details</h1>
+  </div>
 </template>
 
 <script>

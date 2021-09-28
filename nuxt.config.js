@@ -35,6 +35,7 @@ export default {
       },
       { name: 'theme-color', content: '#121829' },
       { name: 'msapplication-TileColor', content: '#121829' },
+      { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
       {
         name: 'title',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
@@ -91,32 +92,24 @@ export default {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'icons/favicon.ico' },
-      {
-        rel: 'apple-touch-icon',
-        href: '/icons/apple-touch-icon.png',
-        sizes: '512x512',
-      },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/icons/favicon-32x32.png',
+        href: '/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '96x96',
+        href: '/favicon-96x96.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/icons/favicon-16x16.png',
-      },
-      {
-        rel: 'manifest',
-        href: '/icons/site.webmanifest',
-      },
-      {
-        rel: 'mask-icon',
-        href: '/icons/safari-pinned-tab.svg',
-        color: '#18a352',
+        href: '/favicon-16x16.png',
       },
     ],
   },
@@ -150,6 +143,7 @@ export default {
   pwa: {},
 
   build: {
+    extractCSS: true,
     postcss: {
       preset: {
         autoprefixer: {
