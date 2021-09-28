@@ -1,3 +1,4 @@
+@use "../partials/functions" as *;
 .index {
     .header {
         width: 100%;
@@ -8,5 +9,15 @@
     }
     .segmented-control-wrapper {
         margin-top: 80px;
+    }
+    .category-title {
+        color: getColor(grey-500);
+        span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    }
+    .list-grid {
+        margin-top: 24px;
     }
 }

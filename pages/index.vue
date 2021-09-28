@@ -21,9 +21,17 @@
       <div class="segmented-control-wrapper">
         <SegmentedControl />
       </div>
+      <div class="category-title">
+        <h3>
+          {{ listTitle }}
+          <span>(120)</span>
+        </h3>
+      </div>
     </div>
-    {{ dataServer }}
-    {{ dataClient }}
+    <div class="loader-container list-grid">
+      <CardLoader :hasAction="false" v-for="index in 8" :key="index" />
+    </div>
+    <div class="lists-container list-grid"></div>
   </div>
 </template>
 
@@ -52,6 +60,9 @@ export default {
   computed: mapState({
     stateSearchTerm() {
       return this.$store.state.search.searchTerm
+    },
+    listTitle() {
+      return this.$store.state.type.listTitle
     },
   }),
   mounted() {

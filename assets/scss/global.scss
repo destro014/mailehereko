@@ -29,7 +29,6 @@ body {
     background-size: 100%;
     background-position: 50% -160px;
     background-repeat: repeat-y;
-    height: 1000vh;
 }
 
 a {
@@ -69,7 +68,12 @@ h1 {
 p {
     color: getColor(grey-400);
 }
-
+.list-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 24px;
+    column-gap: 24px;
+}
 @media screen and (max-width: 1440px) {
     body {
         background-size: 1440px;

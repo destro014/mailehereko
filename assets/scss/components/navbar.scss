@@ -6,6 +6,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 100;
     background: getColor(grey-900-80);
     backdrop-filter: blur($blur-amount);
 }

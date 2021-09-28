@@ -3,7 +3,7 @@
 
 //loaders
 
-// @import "components/loaders/indexLoader.scss";
+@forward "components/loaders/cardLoader.scss";
 
 //components styles
 @forward "components/icon.scss";

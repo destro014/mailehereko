@@ -133,6 +133,7 @@ export default {
       '~/components/core/',
       '~/components/layout',
       '~/components/block',
+      '~/components/loaders',
     ],
   },
 
