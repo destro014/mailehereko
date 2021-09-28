@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   head: {
     titleTemplate: '%s Maile Hereko',
@@ -136,12 +138,14 @@ export default {
 
   buildModules: [],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@layer0/nuxt/module'],
-
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@layer0/nuxt/module',
+    '@nuxtjs/dotenv',
+  ],
   axios: {},
-
   pwa: {},
-
   build: {
     extractCSS: true,
     postcss: {

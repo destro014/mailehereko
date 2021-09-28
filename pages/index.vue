@@ -44,10 +44,6 @@ export default {
       dataClient: null,
     }
   },
-  async fetch() {
-    await console.log('already fetched on server')
-    this.dataServer = 'generated on server side'
-  },
   watch: {
     searchTerm: function (val, oldVal) {
       this.$store.dispatch('search/setSearchTerm', this.searchTerm)
@@ -60,7 +56,10 @@ export default {
   }),
   mounted() {
     console.log('mounted')
-    this.dataClient = 'Generated on client side'
+    this.dataClient =
+      process.env.FIREBASE_API_KEY +
+      ' and and and ' +
+      process.env.FIREBASE_PROJECT_ID
   },
 }
 </script>
