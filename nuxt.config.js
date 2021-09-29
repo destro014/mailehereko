@@ -50,12 +50,12 @@ export default {
       {
         hid: 'title',
         name: 'title',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'MaileHereko',
       },
       {
         hid: 'description',
         name: 'description',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'Movies and TV Shows watched by Pramod Poudel',
       },
       {
         hid: 'keywords',
@@ -66,12 +66,12 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'MaileHereko',
       },
       {
         hid: 'og:description',
         property: 'og:description',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'Movies and TV Shows watched by Pramod Poudel',
       },
       {
         hid: 'og:image',
@@ -111,12 +111,12 @@ export default {
       {
         hid: 'twitter:title',
         property: 'twitter:title',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'MaileHereko',
       },
       {
         hid: 'twitter:description',
         property: 'twitter:description',
-        content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
+        content: 'Movies and TV Shows watched by Pramod Poudel',
       },
       {
         hid: 'twitter:image',
