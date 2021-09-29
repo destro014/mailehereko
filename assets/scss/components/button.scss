@@ -1,20 +1,90 @@
+@use "../partials/functions" as *;
+
 .btn {
-    margin-top: 16px;
-    padding: 16px 32px;
-    background: $primary-blue-500;
-    border-radius: 16px;
-    width: 100%;
-    font-weight: 700;
-    color: $background-primary;
+    outline: none;
+    border: none;
+    background: getColor(primary-400);
+    color: getColor(white-100);
+    padding: toRem(16) toRem(32);
+    border-radius: toRem(12);
+    .mh-icon {
+        svg {
+            stroke: getColor(white-100);
+        }
+    }
+    .btn-icon {
+        display: inherit;
+    }
+    .icon-left {
+        margin-right: toRem(8);
+    }
+    .icon-right {
+        margin-left: toRem(8);
+    }
     &:hover {
-        background: $primary-blue-400;
+        background: getColor(primary-500);
+    }
+    &:focus {
+        border: none;
+        outline: none;
+        background: getColor(primary-400);
+        box-shadow: 0 0 0 2px getColor(primary-700);
     }
 }
-.btn-secondary {
-    background: $primary-blue-900;
-    color: $text-tertary;
+.card-action {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    color: getColor(primary-400);
+    border-radius: toRem(0);
+    .mh-icon {
+        svg {
+            stroke: getColor(primary-400);
+        }
+    }
     &:hover {
-        background: $primary-blue-800;
-        color: $text-primary;
+        color: getColor(primary-500);
+        background: transparent;
+        .mh-icon {
+            svg {
+                stroke: getColor(primary-500);
+            }
+        }
+    }
+    &:focus {
+        color: getColor(primary-400);
+        background: transparent;
+        box-shadow: 0 1px 0 0px getColor(primary-400);
+        .mh-icon {
+            svg {
+                stroke: getColor(primary-400);
+            }
+        }
+    }
+    &.success {
+        color: getColor(success-400);
+        .mh-icon {
+            svg {
+                stroke: getColor(success-400);
+            }
+        }
+        &:hover {
+            color: getColor(success-500);
+            .mh-icon {
+                svg {
+                    stroke: getColor(success-500);
+                }
+            }
+        }
+        &:focus {
+            color: getColor(success-400);
+            box-shadow: 0 1px 0 0 getColor(success-400);
+            .mh-icon {
+                svg {
+                    stroke: getColor(success-400);
+                }
+            }
+        }
     }
 }

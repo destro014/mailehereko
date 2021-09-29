@@ -1,6 +1,6 @@
 <template>
   <div class="card-skeleton">
-    <div class="rating-sekelton"></div>
+    <div class="rating-skeleton"></div>
     <div class="image-skeleton"></div>
     <div class="info-skeleton">
       <div class="title-skeleton"></div>

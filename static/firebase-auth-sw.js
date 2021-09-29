@@ -1,10 +1,10 @@
 const ignorePaths = ["\u002F__webpack_hmr","\u002F_loading","\u002F_nuxt\u002F"]
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js'
+  'https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js'
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js'
+  'https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js'
 )
 firebase.initializeApp({"apiKey":"AIzaSyB44XmaAnabd4adYctoCxBWar2OEEF41TQ","authDomain":"mailehereko.firebaseapp.com","projectId":"mailehereko","storageBucket":"mailehereko.appspot.com","messagingSenderId":"823471565644","appId":"1:823471565644:web:5632e4f8c236ddb4a8bde9"})
 

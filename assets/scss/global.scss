@@ -6,15 +6,18 @@
 @use "partials/typography";
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: getColor(grey-800);
+    background: getColor(grey-900);
 }
 ::-webkit-scrollbar-thumb {
-    background: getColor(primary-400);
+    background: getColor(grey-800);
     border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    &:hover {
+        background: getColor(grey-700);
+    }
 }
 html {
     @include colors;
@@ -45,11 +48,16 @@ a {
     margin-left: auto;
     margin-right: auto;
 }
+.image {
+    background-image: url("~assets/img/placeholder.png");
+    background-size: cover;
+    background-position: center;
+}
 .default-view {
     margin-bottom: 128px;
 }
 .status-bar {
-    width: calc(100% + 32px);
+    width: 100%;
     margin-left: -16px;
     margin-top: -20px;
     height: 20px;
@@ -73,12 +81,10 @@ p {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     row-gap: 24px;
     column-gap: 24px;
+    align-items: start;
 }
 @media screen and (max-width: 1440px) {
     body {
         background-size: 1440px;
-    }
-    .page {
-        margin-top: 24px;
     }
 }

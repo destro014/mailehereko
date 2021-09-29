@@ -28,10 +28,17 @@
         </h3>
       </div>
     </div>
-    <div class="loader-container list-grid">
+    <div class="loader-container list-grid" v-if="loading">
       <CardLoader :hasAction="false" v-for="index in 8" :key="index" />
     </div>
-    <div class="lists-container list-grid"></div>
+    <div class="lists-container list-grid">
+      <Card
+        :hasAction="false"
+        v-for="item in lists"
+        :key="item.id"
+        :item="item"
+      />
+    </div>
   </div>
 </template>
 
@@ -48,8 +55,8 @@ export default {
   data() {
     return {
       searchTerm: null,
-      dataServer: null,
-      dataClient: null,
+      loading: true,
+      lists: [],
     }
   },
   watch: {
@@ -66,11 +73,15 @@ export default {
     },
   }),
   mounted() {
-    console.log('mounted')
-    this.dataClient =
-      process.env.FIREBASE_API_KEY +
-      ' and and and ' +
-      process.env.FIREBASE_PROJECT_ID
+    this.$fire.firestore
+      .collection('lists')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.lists.push(doc.data())
+        })
+        this.loading = false
+      })
   },
 }
 </script>

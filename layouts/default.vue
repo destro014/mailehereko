@@ -1,7 +1,8 @@
 <template>
   <div class="default-view">
+    <div class="status-bar"></div>
     <Navbar />
-    <Nuxt />
+    <Nuxt keep-alive />
     <Footer />
   </div>
 </template>
