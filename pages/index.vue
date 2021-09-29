@@ -57,8 +57,8 @@ export default {
       searchTerm: null,
     }
   },
-  async fetch() {
-    await this.$store.dispatch('lists/getLists')
+  mounted() {
+    this.$store.dispatch('lists/getLists')
   },
   watch: {
     searchTerm: function (val, oldVal) {

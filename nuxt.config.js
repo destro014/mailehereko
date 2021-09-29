@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 export default {
+  target: 'server',
   head: {
     titleTemplate: '%s Maile Hereko',
     htmlAttrs: {
@@ -167,14 +168,13 @@ export default {
     ],
   },
 
-  buildModules: [],
-
-  modules: [
+  buildModules: [
     '@nuxtjs/axios',
     '@layer0/nuxt/module',
     '@nuxtjs/dotenv',
     '@nuxtjs/firebase',
   ],
+  modules: [],
   firebase: {
     config: {
       apiKey: process.env.FIREBASE_API_KEY,
