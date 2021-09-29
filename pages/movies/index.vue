@@ -34,7 +34,7 @@ export default {
           hid: 'og:image',
           property: 'og:image',
           content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.jpg',
+            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.png',
         },
         {
           hid: 'twitter:title',
@@ -50,7 +50,7 @@ export default {
           hid: 'twitter:image',
           property: 'twitter:image',
           content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.jpg',
+            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.png',
         },
       ],
     }

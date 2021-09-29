@@ -57,6 +57,9 @@ export default {
       searchTerm: null,
     }
   },
+  async fetch() {
+    await this.$store.dispatch('lists/getLists')
+  },
   watch: {
     searchTerm: function (val, oldVal) {
       this.$store.dispatch('search/setSearchTerm', this.searchTerm)
@@ -93,8 +96,5 @@ export default {
       })
     },
   }),
-  mounted() {
-    this.$store.dispatch('lists/getLists')
-  },
 }
 </script>
