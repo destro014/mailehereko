@@ -171,7 +171,6 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@layer0/nuxt/module',
     '@nuxtjs/dotenv',
     '@nuxtjs/firebase',
@@ -201,7 +200,6 @@ export default {
     },
   },
   axios: {},
-  pwa: {},
   build: {
     extractCSS: true,
     postcss: {

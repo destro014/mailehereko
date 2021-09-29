@@ -13,8 +13,7 @@
   "private": true,
   "dependencies": {
     "@nuxt/core": "^2.15.7",
-    "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/pwa": "^3.3.5"
+    "@nuxtjs/axios": "^5.13.6"
   },
   "devDependencies": {
     "@layer0/cli": "^3.16.10",
