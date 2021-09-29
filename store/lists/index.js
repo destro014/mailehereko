@@ -1,22 +1,33 @@
 export const state = () => ({
-  lists: '',
+  lists: [],
+  loading: true,
 })
 export const getter = {
   lists: (state) => {
     return state.lists
   },
+  loading: (state) => {
+    return state.loading
+  },
 }
 export const mutations = {
   SET_LIST: (state, lists) => {
-    state.lists = lists
+    state.lists.unshift(lists)
+  },
+  SET_LOADING: (state) => {
+    state.loading = false
   },
 }
 export const actions = {
-//   async setUser(state, userData) {
-//     state.commit('SET_LIST', {
-//       email: userData.email,
-//       displayName: userData.displayName,
-//     })
-//   },
-  
+  async getLists(state, userData) {
+    await this.$fire.firestore
+      .collection('lists')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          state.commit('SET_LIST', doc.data())
+        })
+        state.commit('SET_LOADING')
+      })
+  },
 }

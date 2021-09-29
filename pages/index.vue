@@ -24,7 +24,7 @@
       <div class="category-title">
         <h3>
           {{ listTitle }}
-          <span>(120)</span>
+          <span>({{ filteredList.length }})</span>
         </h3>
       </div>
     </div>
@@ -34,7 +34,7 @@
     <div class="lists-container list-grid">
       <Card
         :hasAction="false"
-        v-for="item in lists"
+        v-for="item in filteredList"
         :key="item.id"
         :item="item"
       />
@@ -55,8 +55,6 @@ export default {
   data() {
     return {
       searchTerm: null,
-      loading: true,
-      lists: [],
     }
   },
   watch: {
@@ -71,17 +69,32 @@ export default {
     listTitle() {
       return this.$store.state.type.listTitle
     },
+    listType() {
+      return this.$store.state.type.listType
+    },
+    lists() {
+      return this.$store.state.lists.lists
+    },
+    loading() {
+      return this.$store.state.lists.loading
+    },
+    filteredList() {
+      let mediaType
+      if (this.listType == 'all') {
+        mediaType = ''
+      } else mediaType = this.listType
+      return this.lists.filter((item) => {
+        return (
+          item.original_title
+            .toLowerCase()
+            .includes(this.stateSearchTerm.toLowerCase()) &&
+          item.media_type.includes(mediaType)
+        )
+      })
+    },
   }),
   mounted() {
-    this.$fire.firestore
-      .collection('lists')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.lists.push(doc.data())
-        })
-        this.loading = false
-      })
+    this.$store.dispatch('lists/getLists')
   },
 }
 </script>

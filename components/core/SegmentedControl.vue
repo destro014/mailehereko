@@ -4,8 +4,8 @@
     <div
       class="active-indicator"
       :style="{
-        width: indicatorWidth + 'px',
-        left: leftValue + 'px',
+        width: indicatorWidth + 'rem',
+        left: leftValue + 'rem',
       }"
     ></div>
     <div class="segmented-group" ref="label1">
@@ -71,14 +71,14 @@ export default {
   methods: {
     updateType() {
       if (this.listType == this.value1) {
-        this.indicatorWidth = this.width1
-        this.leftValue = 8
+        this.indicatorWidth = this.width1 / 16
+        this.leftValue = 8 / 16
       } else if (this.listType == this.value2) {
-        this.indicatorWidth = this.width2
-        this.leftValue = this.width1 + 8
+        this.indicatorWidth = this.width2 / 16
+        this.leftValue = (this.width1 + 8) / 16
       } else if (this.listType == this.value3) {
-        this.indicatorWidth = this.width3
-        this.leftValue = this.width1 + this.width2 + 8
+        this.indicatorWidth = this.width3 / 16
+        this.leftValue = (this.width1 + this.width2 + 8) / 16
       }
     },
   },

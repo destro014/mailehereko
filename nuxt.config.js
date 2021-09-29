@@ -35,62 +35,92 @@ export default {
         name: 'apple-mobile-web-app-title',
         content: 'Maile Hereko',
       },
-      { name: 'theme-color', content: '#121829' },
-      { name: 'msapplication-TileColor', content: '#121829' },
-      { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
+      { hid: 'theme-color', name: 'theme-color', content: '#121829' },
       {
+        hid: 'msapplication-TileColor',
+        name: 'msapplication-TileColor',
+        content: '#121829',
+      },
+      {
+        hid: 'msapplication-TileImage',
+        name: 'msapplication-TileImage',
+        content: '/ms-icon-144x144.png',
+      },
+      {
+        hid: 'title',
         name: 'title',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'description',
         name: 'description',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'keywords',
         name: 'keywords',
         content:
           'mailehereko, movies, tvshows, tv series, movies to watch, pramod poudel',
       },
       {
+        hid: 'og:title',
         property: 'og:title',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'og:description',
         property: 'og:description',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'og:image',
         property: 'og:image',
-        content: '/img/banner.jpg',
+        content: 'https://mailehereko.pramodpoudel.com.np/img/banner.png',
       },
       {
+        hid: 'og:url',
         property: 'og:url',
         content: 'https://mailehereko.pramodpoudel.com.np',
       },
 
-      { property: 'og:locale', content: 'en_EN' },
-
-      { property: 'og:site_name', content: 'MaileHereko' },
-
-      { property: 'og:type', content: 'website' },
-
-      { name: 'twitter:site', content: '@destro014' },
-
-      { property: 'twitter:card', content: 'summary_large_image' },
-
-      { property: 'twitter:url', content: 'https://twitter.com/destro014' },
+      { hid: 'og:locale', property: 'og:locale', content: 'en_EN' },
 
       {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'MaileHereko',
+      },
+
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+
+      { hid: 'twitter:site', name: 'twitter:site', content: '@destro014' },
+
+      {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        content: 'summary_large_image',
+      },
+
+      {
+        hid: 'twitter:url',
+        property: 'twitter:url',
+        content: 'https://twitter.com/destro014',
+      },
+
+      {
+        hid: 'twitter:title',
         property: 'twitter:title',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'twitter:description',
         property: 'twitter:description',
         content: 'MaileHereko - Movies and TV Shows watched by Pramod Poudel',
       },
       {
+        hid: 'twitter:image',
         property: 'twitter:image',
-        content: 'https://mailehereko.pramodpoudel.com.np/img/banner.jpg',
+        content: 'https://mailehereko.pramodpoudel.com.np/img/banner.png',
       },
     ],
     link: [
@@ -162,8 +192,8 @@ export default {
       auth: {
         persistence: 'local', // default
         initialize: {
-          onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED',
-          onAuthStateChangedAction: 'onAuthStateChanged',
+          onAuthStateChangedMutation: 'users/ON_AUTH_STATE_CHANGED',
+          onAuthStateChangedAction: 'users/onAuthStateChanged',
           subscribeManually: false,
         },
         ssr: true,
