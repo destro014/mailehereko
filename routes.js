@@ -8,6 +8,9 @@ module.exports = new Router()
   .match('/service-worker.js', ({ serviceWorker }) => {
     serviceWorker('.nuxt/dist/client/service-worker.js')
   })
+  .match('/sitemap.xml', ({ renderWithApp }) => {
+    renderWithApp()
+  })
   .get('/movies/:id', ({ cache }) => {
     cache({
       edge: {
