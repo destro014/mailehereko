@@ -173,6 +173,7 @@ export default {
     '@layer0/nuxt/module',
     '@nuxtjs/dotenv',
     '@nuxtjs/firebase',
+    '@nuxtjs/sitemap',
   ],
   modules: [],
   firebase: {
@@ -200,6 +201,13 @@ export default {
     },
   },
   axios: {},
+  sitemap: {
+    hostname: 'https://mailehereko.pramodpoudel.com.np',
+    exclude: ['/login', '/prasasan/**'],
+    defaults: {
+      lastmod: new Date(),
+    },
+  },
   build: {
     extractCSS: true,
     postcss: {
