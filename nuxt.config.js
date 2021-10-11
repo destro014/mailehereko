@@ -1,7 +1,6 @@
 require('dotenv').config()
 
 export default {
-  target: 'server',
   head: {
     titleTemplate: '%s Maile Hereko',
     htmlAttrs: {
@@ -152,7 +151,7 @@ export default {
 
   router: {
     linkExactActiveClass: 'active',
-    // middleware: ['authenticated'],
+    middleware: ['authenticated'],
   },
   css: ['@/assets/scss/mailehereko.scss'],
   plugins: [],
@@ -168,14 +167,15 @@ export default {
     ],
   },
 
-  buildModules: [
+  buildModules: [],
+  modules: [
     '@nuxtjs/axios',
     '@layer0/nuxt/module',
     '@nuxtjs/dotenv',
     '@nuxtjs/firebase',
+    '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
   ],
-  modules: [],
   firebase: {
     config: {
       apiKey: process.env.FIREBASE_API_KEY,
@@ -190,14 +190,19 @@ export default {
         enablePersistence: true,
       },
       auth: {
-        persistence: 'local', // default
         initialize: {
-          onAuthStateChangedMutation: 'users/ON_AUTH_STATE_CHANGED',
           onAuthStateChangedAction: 'users/onAuthStateChanged',
-          subscribeManually: false,
         },
         ssr: true,
       },
+    },
+  },
+  pwa: {
+    workbox: {
+      importScripts: ['/firebase-auth-sw.js'],
+      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+      // only set this true for testing and remember to always clear your browser cache in development
+      dev: process.env.NODE_ENV === 'development',
     },
   },
   axios: {},
@@ -221,5 +226,6 @@ export default {
         },
       },
     },
+    maximumFileSizeToCacheInBytes: 50000000,
   },
 }

@@ -4,9 +4,18 @@
       <h1>MaileHereko</h1>
       <p>
         List of movies and TV Shows, I,
-        <a href="https://pramodpoudel.com.np">Pramod Poudel</a> have watched
-        till date. Explore what I have watched and also feel free to make a
-        suggestion. 😉
+        <a
+          href="https://pramodpoudel.com.np"
+          class="external-links"
+          target="_blank"
+          >Pramod Poudel</a
+        >
+        have watched till date. Explore what I have watched and also feel free
+        to make a
+        <NuxtLink :to="{ name: 'suggest' }" class="external-links">
+          suggestion.
+        </NuxtLink>
+        😉
       </p>
       <div class="search-wrapper">
         <Input
@@ -58,7 +67,9 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('lists/getLists')
+    if (this.lists.length < 1) {
+      this.$store.dispatch('lists/getLists')
+    }
   },
   watch: {
     searchTerm: function (val, oldVal) {
@@ -87,12 +98,21 @@ export default {
         mediaType = ''
       } else mediaType = this.listType
       return this.lists.filter((item) => {
-        return (
-          item.original_title
-            .toLowerCase()
-            .includes(this.stateSearchTerm.toLowerCase()) &&
-          item.media_type.includes(mediaType)
-        )
+        if (item.media_type == 'movie') {
+          return (
+            item.original_title
+              .toLowerCase()
+              .includes(this.stateSearchTerm.toLowerCase()) &&
+            item.media_type.includes(mediaType)
+          )
+        } else {
+          return (
+            item.original_name
+              .toLowerCase()
+              .includes(this.stateSearchTerm.toLowerCase()) &&
+            item.media_type.includes(mediaType)
+          )
+        }
       })
     },
   }),

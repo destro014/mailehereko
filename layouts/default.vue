@@ -2,7 +2,7 @@
   <div class="default-view">
     <div class="status-bar"></div>
     <Navbar />
-    <Nuxt keep-alive />
+    <Nuxt />
     <Footer />
   </div>
 </template>

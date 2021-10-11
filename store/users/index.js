@@ -1,50 +1,42 @@
+// import initialState from './state'
+
 export const state = () => ({
-  user: '',
+  authUser: null,
 })
-export const getter = {
-  user: (state) => {
-    return state.user
+export const getters = {
+  isLoggedIn: (state) => {
+    try {
+      return state.authUser.uid !== null
+    } catch {
+      return false
+    }
   },
 }
 export const mutations = {
-  SET_USER: (state, authUser) => {
-    state.user = authUser
+  RESET_STORE: (state) => {
+    Object.assign(state, initialState())
   },
-  ON_AUTH_STATE_CHANGED: (state, { authUser, claims }) => {
-    if (!authUser) {
-      state.user = null
-    } else {
-      const { uid, email, emailVerified, displayName } = authUser
-      state.user = { uid, email, emailVerified, displayName }
+
+  SET_AUTH_USER: (state, { authUser }) => {
+    state.authUser = {
+      uid: authUser.uid,
+      email: authUser.email,
     }
   },
 }
 export const actions = {
-  async setUser(state, userData) {
-    state.commit('SET_USER', {
-      email: userData.email,
-      displayName: userData.displayName,
-    })
-  },
-  async onAuthStateChanged(state, { authUser, claims }) {
+  async onAuthStateChanged({ commit }, { authUser }) {
     if (!authUser) {
-      state.commit('SET_USER', null)
-      this.$router.push({
-        path: '/',
-      })
-    } else {
-      const { uid, email, emailVerified, displayName } = authUser
-      state.commit('SET_USER', {
-        uid,
-        email,
-        emailVerified,
-        displayName,
-      })
-      if (!emailVerified) {
-        this.$router.push({
-          path: '/account/verify/',
-        })
+      commit('RESET_STORE')
+      return
+    }
+    if (authUser && authUser.getIdToken) {
+      try {
+        const idToken = await authUser.getIdToken(true)
+      } catch (e) {
+        console.error(e)
       }
     }
+    commit('SET_AUTH_USER', { authUser })
   },
 }

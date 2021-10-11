@@ -21,17 +21,32 @@
             name: this.item.media_type + '-id',
             params: { id: this.item.id },
           }"
-          >{{ item.original_title }}
+          >{{ item.original_title || item.original_name }}
         </NuxtLink>
         <button
           class="btn card-action"
           v-if="hasAction"
-          :class="{ success: action == 'watched' }"
+          :class="{
+            success: action == 'watched',
+            success: newAction == 'added',
+          }"
+          @click="buttonAction"
         >
-          <div class="btn-icon icon-left">
-            <Icon :name="action" />
+          <span v-if="actionPending" class="loader">
+            <div class="sk-chase">
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+            </div>
+          </span>
+
+          <div class="btn-icon icon-left" :class="{ hidden: actionPending }">
+            <Icon :name="newAction" />
           </div>
-          <div class="action-name">{{ actionName }}</div>
+          <div class="action-name">{{ newActionName }}</div>
         </button>
       </div>
     </div>
@@ -44,9 +59,37 @@ export default {
   props: ['hasAction', 'action', 'actionName', 'item'],
   data() {
     return {
-      media_type: 'movie',
-      id: '123',
+      actionPending: false,
+      newAction: null,
+      newActionName: null,
     }
+  },
+  mounted() {
+    this.newAction = this.action
+    this.newActionName = this.actionName
+  },
+  methods: {
+    async buttonAction() {
+      if (this.action == 'watched') {
+        console.log('No action rewuired')
+      }
+      if (this.action == 'plus') {
+        this.newActionName = 'Adding'
+        this.actionPending = true
+        this.newAction = ''
+        let data = this.item
+        await this.$fire.firestore
+          .collection('lists')
+          .doc(this.item.id + this.item.media_type)
+          .set(data)
+          .then((doc) => {
+            this.newActionName = 'Added'
+            this.newAction = 'added'
+            this.actionPending = false
+            console.log('added succesfully')
+          })
+      }
+    },
   },
 }
 </script>

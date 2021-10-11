@@ -19,6 +19,9 @@
         background: getColor(grey-700);
     }
 }
+:root {
+    color-scheme: dark;
+}
 html {
     @include colors;
     font-size: 16px;
@@ -34,13 +37,37 @@ body {
     background-position: 50% -160px;
     background-repeat: repeat-y;
 }
-
+.page {
+    margin-top: 120px;
+    margin-bottom: 160px;
+    min-height: 720px;
+}
 a {
     text-decoration: none;
     color: getColor(primary-400);
     background-color: transparent;
 }
-
+.external-links {
+    color: getColor(primary-400);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    &::after {
+        content: "";
+        background: getColor(primary-400);
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 4px;
+        z-index: -1;
+        transition: 300ms animationBeizer();
+    }
+    &:hover:after {
+        width: 100%;
+    }
+}
 .container {
     width: 100%;
     padding-left: 120px;
@@ -54,9 +81,6 @@ a {
     background-size: cover;
     background-position: center;
 }
-.default-view {
-    margin-bottom: 128px;
-}
 .status-bar {
     width: 100%;
     margin-left: -16px;
@@ -67,10 +91,7 @@ a {
     z-index: 10;
     background: getColor(grey-900);
 }
-.page {
-    margin-top: 120px;
-    margin-bottom: 160px;
-}
+
 h1 {
     color: getColor(grey-50);
 }

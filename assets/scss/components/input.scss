@@ -1,10 +1,11 @@
 @use "../partials/functions" as *;
 .input-group {
     position: relative;
-    background: getColor(black-10);
     border-radius: 12px;
+    margin-bottom: 8px;
     input {
         background: transparent;
+        background: getColor(black-10);
         outline: none;
         border: none;
         appearance: none;
@@ -20,9 +21,8 @@
             border-color: getColor(primary-500);
             & + label {
                 transform: translateY(-12px);
-                color: getColor(grey-400);
+                color: getColor(grey-400) !important;
             }
-
             &::placeholder {
                 opacity: 0.4;
             }
@@ -32,7 +32,7 @@
         }
         &:not(:placeholder-shown) + label {
             transform: translateY(-12px);
-            color: getColor(grey-400);
+            color: getColor(grey-600);
         }
     }
     label {
@@ -62,13 +62,18 @@
             stroke: getColor(grey-600);
         }
     }
+    .cursor-pointer {
+        cursor: pointer;
+    }
     .supporting-link {
         margin-top: 8px;
         text-align: right;
     }
     .input-feedback {
         margin-top: 4px;
+        margin-left: 16px;
         color: getColor(grey-400);
+        height: 24px;
         p {
             margin: 0;
         }
@@ -78,13 +83,14 @@
             border-color: getColor(error-400);
             &:focus {
                 & + label {
-                    color: getColor(error-400);
+                    color: getColor(error-400) !important;
                 }
             }
             &:not(:placeholder-shown) + label {
                 color: getColor(error-400);
             }
         }
+
         label {
             color: getColor(error-400);
         }
@@ -92,7 +98,29 @@
             color: getColor(error-400);
         }
         svg {
-            fill: getColor(error-400) !important;
+            stroke: getColor(error-400) !important;
+        }
+    }
+    &.has-success {
+        input {
+            border-color: getColor(success-400);
+            &:focus {
+                & + label {
+                    color: getColor(success-400) !important;
+                }
+            }
+            &:not(:placeholder-shown) + label {
+                color: getColor(success-400);
+            }
+        }
+        label {
+            color: getColor(success-400);
+        }
+        .input-feedback p {
+            color: getColor(success-400);
+        }
+        svg {
+            stroke: getColor(success-400) !important;
         }
     }
 }
