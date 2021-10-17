@@ -105,7 +105,9 @@ export default {
           )
           .then(() => {
             this.btnLabel = 'Logged In'
-            this.$router.push('/prasasan')
+            setTimeout(() => {
+              this.$router.push('/prasasan')
+            }, 1000)
           })
           .catch((error) => {
             if (error.code == 'auth/too-many-requests') {
