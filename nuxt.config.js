@@ -208,9 +208,29 @@ export default {
     hostname: 'https://mailehereko.pramodpoudel.com.np',
     exclude: ['/bhitra', '/prasasan/*', '/prasasan'],
     defaults: {
-      lastmod: new Date(),
+      priority: 0.7,
     },
     routes: [
+      {
+        url: '/',
+        priority: 1,
+        lastmod: new Date(),
+      },
+      {
+        url: '/movies',
+        priority: 0.8,
+        lastmod: new Date(),
+      },
+      {
+        url: '/tvshows',
+        priority: 0.8,
+        lastmod: new Date(),
+      },
+      {
+        url: '/suggest',
+        priority: 0.8,
+        lastmod: new Date(),
+      },
       '/movie/99861 ',
       '/tv/86453 ',
       '/tv/84958 ',
