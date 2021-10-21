@@ -9,6 +9,11 @@
 <script>
 export default {
   name: 'default',
+  mounted() {
+    if (this.lists.length < 1) {
+      this.$store.dispatch('lists/getLists')
+    }
+  },
 }
 </script>
 <style></style>

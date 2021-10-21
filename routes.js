@@ -8,8 +8,8 @@ module.exports = new Router()
   .match('/service-worker.js', ({ serviceWorker }) => {
     serviceWorker('.nuxt/dist/client/service-worker.js')
   })
-  .match('/sitemap.xml', ({ renderWithApp }) => {
-    renderWithApp()
+  .match('/sitemap.xml', ({ serveStatic }) => {
+    serveStatic('dist/sitemap.xml')
   })
   .get('/movies/:id', ({ cache }) => {
     cache({

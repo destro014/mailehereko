@@ -2,7 +2,7 @@ require('dotenv').config()
 
 export default {
   head: {
-    titleTemplate: '%s Maile Hereko',
+    titleTemplate: '%s MaileHereko',
     htmlAttrs: {
       lang: 'en',
     },
@@ -54,7 +54,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Movies and TV Shows watched by Pramod Poudel',
+        content: 'Movies and TV Shows watched by Pramod Poudel.',
       },
       {
         hid: 'keywords',
@@ -200,15 +200,13 @@ export default {
   pwa: {
     workbox: {
       importScripts: ['/firebase-auth-sw.js'],
-      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
-      // only set this true for testing and remember to always clear your browser cache in development
       dev: process.env.NODE_ENV === 'development',
     },
   },
   axios: {},
   sitemap: {
     hostname: 'https://mailehereko.pramodpoudel.com.np',
-    exclude: ['/login', '/prasasan/**'],
+    exclude: ['/bhitra', '/prasasan/*', '/prasasan'],
     defaults: {
       lastmod: new Date(),
     },
