@@ -36,7 +36,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content: this.item.overview,
+          content: this.item.tagline,
         },
         {
           hid: 'og:image',
