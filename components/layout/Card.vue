@@ -11,7 +11,7 @@
       <div class="card-image image">
         <img
           :src="'https://image.tmdb.org/t/p/w500' + item.poster_path"
-          alt=""
+          :alt="item.original_title || item.original_name"
         />
       </div>
       <div class="card-info">

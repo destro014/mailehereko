@@ -25,6 +25,7 @@
 html {
     @include colors;
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 html,
 body {
