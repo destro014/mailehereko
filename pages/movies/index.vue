@@ -1,10 +1,52 @@
 <template>
   <div class="movies-page page container">
-    <h1>Movies</h1>
+    <div class="header">
+      <div class="breadcrumb-container">
+        <NuxtLink :to="{ name: 'index' }" class="breadcrumb-link-item"
+          >Mailehereko</NuxtLink
+        >
+      </div>
+      <h1>Movies</h1>
+      <div class="search-wrapper">
+        <Input
+          type="text"
+          name="search"
+          label="Search movies or tv shows"
+          placeholder="eg. Avenger"
+          leftIcon="search"
+          v-bind:value.sync="searchTerm"
+        />
+      </div>
+    </div>
+    <p>{{ filteredList.length }} items</p>
+
+    <div class="loader-container list-grid" v-if="loading">
+      <CardLoader :hasAction="false" v-for="index in 8" :key="index" />
+    </div>
+    <!-- [ -->
+    <!-- <p
+      :hasAction="false"
+      v-for="item in filteredList"
+      :key="item.id"
+      :item="item"
+    >
+      '/{{ item.media_type }}/{{ item.id }} ',
+    </p>
+    ] -->
+    <div class="lists-container list-grid">
+      <Card
+        :hasAction="false"
+        v-for="item in filteredList"
+        :key="item.id"
+        :item="item"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   head() {
     return {
@@ -91,6 +133,42 @@ export default {
       ],
     }
   },
+  data() {
+    return {
+      searchTerm: null,
+    }
+  },
+  watch: {
+    searchTerm: function (val, oldVal) {
+      this.$store.dispatch('search/setSearchTerm', this.searchTerm)
+    },
+  },
+  computed: mapState({
+    stateSearchTerm() {
+      return this.$store.state.search.searchTerm
+    },
+    listTitle() {
+      return this.$store.state.type.listTitle
+    },
+    listType() {
+      return this.$store.state.type.listType
+    },
+    lists() {
+      return this.$store.state.lists.lists
+    },
+    loading() {
+      return this.$store.state.lists.loading
+    },
+    filteredList() {
+      return this.lists.filter((item) => {
+        if (item.media_type == 'movie') {
+          return item.original_title
+            .toLowerCase()
+            .includes(this.stateSearchTerm.toLowerCase())
+        }
+      })
+    },
+  }),
 }
 </script>
 

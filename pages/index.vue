@@ -77,9 +77,9 @@ export default {
     }
   },
   mounted() {
-    if (this.lists.length < 1) {
-      this.$store.dispatch('lists/getLists')
-    }
+    // if (this.lists.length < 1) {
+    // this.$store.dispatch('lists/getLists')
+    // }
   },
   watch: {
     searchTerm: function (val, oldVal) {

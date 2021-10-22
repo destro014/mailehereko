@@ -14,6 +14,7 @@
 @forward "components/navbar.scss";
 @forward "components/footer.scss";
 @forward "components/card.scss";
+@forward "components/breadCrumb.scss";
 @forward "components/detailsHeader.scss";
 @forward "components/detailsWrapper.scss";
 
@@ -21,3 +22,5 @@
 @forward "pages/index.scss";
 @forward "pages/login.scss";
 @forward "pages/add.scss";
+@forward "pages/movies.scss";
+@forward "pages/tvShows.scss";

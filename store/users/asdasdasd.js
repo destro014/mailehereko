@@ -14,7 +14,7 @@ export const getters = {
 }
 export const mutations = {
   RESET_STORE: (state) => {
-    Object.assign(state, state.authUser)
+    Object.assign(state, '')
   },
 
   SET_AUTH_USER: (state, { authUser }) => {

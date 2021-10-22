@@ -11,6 +11,7 @@
           leftIcon="search"
           v-bind:value.sync="searchTerm"
           required="required"
+          keep-alive
         />
         <Button type="submit" :label="btnLabel" :state="btnState" />
       </form>

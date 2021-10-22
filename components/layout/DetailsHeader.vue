@@ -9,7 +9,7 @@
     <div class="header-title-container">
       <div class="breadcrumb-container">
         <NuxtLink :to="{ name: 'index' }" class="breadcrumb-link-item"
-          >Home</NuxtLink
+          >MaileHereko</NuxtLink
         >
         <p class="small breadcrumb-seperator">/</p>
         <NuxtLink
@@ -21,7 +21,7 @@
         <NuxtLink
           class="breadcrumb-link-item"
           :to="{ name: 'movies' }"
-          v-if="type == 'movies'"
+          v-if="type == 'movie'"
           >Movies
         </NuxtLink>
       </div>

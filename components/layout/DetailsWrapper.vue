@@ -60,23 +60,27 @@
         <p class="label" v-if="type == 'movie'">Run time</p>
         <p class="label" v-if="type == 'tv'">Episode run time</p>
         <p class="large" v-if="type == 'movie'">{{ details.runtime }}</p>
-        <div class="runtime-wrapper" v-if="type == 'tv'">
-          <p
+        <p class="runtime-wrapper" v-if="type == 'tv'">
+          <span
             class="run-time large"
             v-for="item in details.episode_run_time"
             :key="item"
           >
             {{ item }}
-          </p>
-        </div>
+          </span>
+        </p>
       </div>
       <div class="genres detail">
         <p class="label">Genres</p>
-        <div class="genre-wrapper">
-          <p class="genre large" v-for="item in details.genres" :key="item.id">
+        <p class="genre-wrapper">
+          <span
+            class="genre large"
+            v-for="item in details.genres"
+            :key="item.id"
+          >
             {{ item.name }}
-          </p>
-        </div>
+          </span>
+        </p>
       </div>
     </div>
   </div>

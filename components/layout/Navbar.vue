@@ -55,6 +55,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+// import { getAuth, signOut } from 'firebase/auth'
 
 export default {
   computed: {
@@ -72,8 +73,15 @@ export default {
     }
   },
   methods: {
-    logout() {
-      console.log('logging out')
+    async logout() {
+      await this.$fire.auth
+        .signOut()
+        .then(() => {
+          this.$router.push('/bhitra')
+        })
+        .catch((error) => {
+          // An error happened.
+        })
     },
   },
 }

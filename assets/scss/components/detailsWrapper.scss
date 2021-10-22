@@ -57,9 +57,7 @@
         }
         .genre-wrapper,
         .runtime-wrapper {
-            display: flex;
-            p {
-                position: relative;
+            span {
                 &:not(:first-of-type) {
                     &::before {
                         content: ",";

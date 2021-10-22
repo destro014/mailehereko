@@ -1,8 +1,5 @@
 <template>
   <div class="card-wrapper">
-    <div class="card-bg image">
-      <img :src="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="" />
-    </div>
     <div class="card-content">
       <div class="card-rating">
         <Icon name="star" />
@@ -50,6 +47,9 @@
         </button>
       </div>
     </div>
+    <!-- <div class="card-bg image">
+      <img :src="'https://image.tmdb.org/t/p/w500' + item.poster_path" alt="" />
+    </div> -->
   </div>
 </template>
 
