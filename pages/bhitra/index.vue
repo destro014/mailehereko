@@ -38,7 +38,7 @@
               v-bind:value.sync="loginCredentials.password"
             />
             <div class="button-container">
-              <button type="submit" class="btn">{{ btnLabel }}</button>
+              <Button type="submit" :label="btnLabel" :state="btnState" />
             </div>
             <div class="form-feedback has-error">
               <p>{{ formFeedback }}</p>
@@ -70,6 +70,7 @@ export default {
       formError: false,
       formFeedback: null,
       btnLabel: 'Login',
+      btnState: 'initial',
     }
   },
   methods: {
@@ -90,6 +91,7 @@ export default {
       return validationValue
     },
     async login() {
+      this.btnState = 'loading'
       this.feedbacks.email = ' '
       this.state.email = ''
       this.feedbacks.password = ' '
@@ -104,12 +106,14 @@ export default {
             this.loginCredentials.password
           )
           .then(() => {
+            this.btnState = 'initial'
             this.btnLabel = 'Logged In'
             setTimeout(() => {
               this.$router.push('/prasasan')
             }, 1000)
           })
           .catch((error) => {
+            this.btnState = 'initial'
             if (error.code == 'auth/too-many-requests') {
               this.state.email = 'has-error'
               this.feedbacks.email =

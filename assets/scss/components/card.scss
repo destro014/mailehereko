@@ -61,6 +61,8 @@
     }
 
     .card-image {
+        display: inline-block;
+        width: 100%;
         height: toRem(400);
         border-radius: toRem(8);
         overflow: hidden;
@@ -79,6 +81,10 @@
         }
         .card-action {
             margin-top: 16px;
+            &.success {
+                cursor: initial;
+                pointer-events: none;
+            }
         }
         .hidden {
             display: none;

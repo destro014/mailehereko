@@ -13,7 +13,7 @@
         </h2>
       </div>
       <div class="description-container detail">
-        <p class="large label">
+        <p class="label">
           {{ details.overview }}
         </p>
       </div>

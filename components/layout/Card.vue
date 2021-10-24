@@ -5,12 +5,18 @@
         <Icon name="star" />
         <p>{{ item.vote_average }}</p>
       </div>
-      <div class="card-image image">
+      <NuxtLink
+        class="card-image image"
+        :to="{
+          name: this.item.media_type + '-id',
+          params: { id: this.item.id },
+        }"
+      >
         <img
           :src="'https://image.tmdb.org/t/p/w500' + item.poster_path"
           :alt="item.original_title || item.original_name"
         />
-      </div>
+      </NuxtLink>
       <div class="card-info">
         <NuxtLink
           class="title"
@@ -23,10 +29,7 @@
         <button
           class="btn card-action"
           v-if="hasAction"
-          :class="{
-            success: action == 'watched',
-            success: newAction == 'added',
-          }"
+          :class="[successClass]"
           @click="buttonAction"
         >
           <span v-if="actionPending" class="loader">
@@ -39,7 +42,6 @@
               <div class="sk-chase-dot"></div>
             </div>
           </span>
-
           <div class="btn-icon icon-left" :class="{ hidden: actionPending }">
             <Icon :name="newAction" />
           </div>
@@ -54,11 +56,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Card',
   props: ['hasAction', 'action', 'actionName', 'item'],
   data() {
     return {
+      successClass: null,
       actionPending: false,
       newAction: null,
       newActionName: null,
@@ -67,11 +71,21 @@ export default {
   mounted() {
     this.newAction = this.action
     this.newActionName = this.actionName
+    if (this.action == 'thumbs-up') {
+      this.lists.forEach((item) => {
+        if (this.item.id == item.id) {
+          console.log('voila')
+          this.successClass = 'success'
+          this.newActionName = 'Already watched'
+          this.newAction = 'watched'
+        }
+      })
+    }
   },
   methods: {
     async buttonAction() {
       if (this.action == 'watched') {
-        console.log('No action rewuired')
+        console.log('No action required')
       }
       if (this.action == 'plus') {
         this.newActionName = 'Adding'
@@ -86,11 +100,34 @@ export default {
             this.newActionName = 'Added'
             this.newAction = 'added'
             this.actionPending = false
+            this.successClass = 'success'
             console.log('added succesfully')
+          })
+      }
+      if (this.newAction == 'thumbs-up') {
+        this.newActionName = 'Suggesting'
+        this.actionPending = true
+        this.newAction = ''
+        let data = this.item
+        await this.$fire.firestore
+          .collection('suggestions')
+          .doc(this.item.id + this.item.media_type)
+          .set(data)
+          .then((doc) => {
+            this.$emit('suggested', true)
+            this.newActionName = 'Suggested'
+            this.newAction = 'added'
+            this.successClass = 'success'
+            this.actionPending = false
           })
       }
     },
   },
+  computed: mapState({
+    lists() {
+      return this.$store.state.lists.lists
+    },
+  }),
 }
 </script>
 

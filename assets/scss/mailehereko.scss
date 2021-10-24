@@ -17,6 +17,7 @@
 @forward "components/breadCrumb.scss";
 @forward "components/detailsHeader.scss";
 @forward "components/detailsWrapper.scss";
+@forward "components/manualSuggestionPopup.scss";
 
 //pages styles
 @forward "pages/index.scss";
@@ -24,3 +25,4 @@
 @forward "pages/add.scss";
 @forward "pages/movies.scss";
 @forward "pages/tvShows.scss";
+@forward "pages/suggest.scss";
