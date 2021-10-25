@@ -95,7 +95,11 @@ export default {
   },
   data() {
     return {
-      item: null,
+      item: {
+        original_name: null,
+        overview: null,
+        backdrop_path: null,
+      },
     }
   },
   async fetch() {
