@@ -1,7 +1,8 @@
 <template>
-  <div class="not-found">
-    <!-- <img src="~/assets/img/404.png" alt="" /> -->
-    <p class="large">
+  <div class="not-found container">
+    <img src="~/assets/img/404.svg" alt="" />
+    <h2>Lost your way?</h2>
+    <p>
       Oops! This is awkward. You are looking for something that doesn't actually
       exist.
     </p>
@@ -12,18 +13,25 @@
 <script>
 export default {
   name: 'NotFound',
+  head() {
+    return {
+      title: '',
+    }
+  },
 }
 </script>
 
 <style lang="scss">
 .not-found {
   min-height: calc(100vh - 184px);
+  max-width: 880px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 80px;
+  h2 {
+    margin-bottom: 24px;
+  }
   p {
     margin-bottom: 16px;
   }
@@ -32,6 +40,7 @@ export default {
   }
   img {
     width: 100%;
+    margin-bottom: 40px;
     height: auto;
   }
 }

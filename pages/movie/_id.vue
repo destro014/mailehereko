@@ -111,6 +111,7 @@ export default {
         },
       }
     )
+    console.log(this.item)
   },
   mounted() {},
 }

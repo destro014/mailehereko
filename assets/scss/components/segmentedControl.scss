@@ -44,3 +44,19 @@
         }
     }
 }
+@media screen and (max-width: 400px) {
+    .segmented-control {
+        padding: toRem(8);
+        .active-indicator {
+            position: absolute;
+            top: toRem(8);
+            bottom: toRem(8);
+            left: toRem(8);
+        }
+        .segmented-label {
+            font-size: toRem(14);
+            font-weight: 700;
+            padding: toRem(8) toRem(16);
+        }
+    }
+}

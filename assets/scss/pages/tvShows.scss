@@ -1,4 +1,5 @@
 .tv-shows-page {
+    margin-top: 64px;
     .header {
         width: 100%;
         max-width: 588px;
@@ -7,7 +8,9 @@
         margin-top: 24px;
         margin-bottom: 48px;
     }
-
+    .breadcrumb-container {
+        margin: 0;
+    }
     .list-grid {
         margin-top: 24px;
     }

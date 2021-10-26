@@ -129,6 +129,13 @@ export default {
             <path d="M10.93 2.09998L6 9.99998"  stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>`
       }
+      if (this.name == 'menu') {
+        this.icon = `<svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3 12H21" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 18H21" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`
+      }
     },
   },
   beforeMount() {

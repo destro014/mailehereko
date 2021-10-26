@@ -30,3 +30,34 @@
         }
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .details-header {
+        .header-title-container {
+            margin-top: -72px;
+            margin-left: 0;
+            .title {
+                @include text-style-heading-h-3;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .details-header {
+        .banner {
+            height: 320px;
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .details-header {
+        .header-title-container {
+            margin-top: -64px;
+            padding: 32px;
+            .title {
+                @include text-style-heading-h-4;
+            }
+        }
+    }
+}

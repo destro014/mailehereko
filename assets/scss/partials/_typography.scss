@@ -55,3 +55,8 @@ a {
         @include text-style-link-extra-small;
     }
 }
+@media screen and (max-width: 640px) {
+    h1 {
+        @include text-style-heading-h-1-sm;
+    }
+}

@@ -5,7 +5,7 @@
 <script>
 export default {
   props: ['error'],
-  layout: 'error-layout',
+  layout: 'default',
 }
 </script>
 

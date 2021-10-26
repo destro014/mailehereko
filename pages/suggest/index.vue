@@ -10,7 +10,7 @@
         <Input
           type="text"
           name="search"
-          label="Search movies or tv shows"
+          label="Search"
           placeholder="eg. Avenger"
           leftIcon="search"
           v-bind:value.sync="searchTerm"

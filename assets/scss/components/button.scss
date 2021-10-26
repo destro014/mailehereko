@@ -194,3 +194,20 @@
         transform: scale(1);
     }
 }
+
+@media screen and (max-width: 480px) {
+    .card-action {
+        font-size: 14px;
+        .btn-icon {
+            display: none;
+        }
+    }
+}
+@media screen and (max-width: 360px) {
+    .card-action {
+        font-size: 16px;
+        .btn-icon {
+            display: inherit;
+        }
+    }
+}
