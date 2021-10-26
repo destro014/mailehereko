@@ -27,7 +27,7 @@
       />
     </div>
     <div class="loader-container list-grid" v-if="loading">
-      <CardLoader :hasAction="false" v-for="index in 8" :key="index" />
+      <CardLoader v-for="index in 8" :key="index" />
     </div>
     <div class="button-container load-more-btn" v-if="moreAvailable">
       <Button

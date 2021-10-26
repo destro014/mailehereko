@@ -1,6 +1,15 @@
 @use "../partials/functions" as *;
 @use "../partials/variables" as *;
 
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: getColor(grey-900-98);
+    backdrop-filter: blur($blur-amount);
+}
 .navbar {
     width: 100%;
     z-index: 200;

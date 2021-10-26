@@ -4,6 +4,8 @@
 //loaders
 
 @forward "components/loaders/cardLoader.scss";
+@forward "components/loaders/smallCardLoader.scss";
+@forward "components/loaders/titleLoader.scss";
 
 //components styles
 @forward "components/icon.scss";
@@ -14,6 +16,8 @@
 @forward "components/navbar.scss";
 @forward "components/footer.scss";
 @forward "components/card.scss";
+@forward "components/smallCard.scss";
+@forward "components/numberCard.scss";
 @forward "components/breadCrumb.scss";
 @forward "components/detailsHeader.scss";
 @forward "components/detailsWrapper.scss";
@@ -21,8 +25,10 @@
 
 //pages styles
 @forward "pages/index.scss";
-@forward "pages/login.scss";
-@forward "pages/add.scss";
 @forward "pages/movies.scss";
 @forward "pages/tvShows.scss";
 @forward "pages/suggest.scss";
+@forward "pages/login.scss";
+@forward "pages/admin.scss";
+@forward "pages/add.scss";
+@forward "pages/suggestions.scss";

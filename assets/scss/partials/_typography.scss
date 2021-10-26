@@ -48,10 +48,10 @@ p {
 }
 a {
     @include text-style-link-regular;
-    .small {
+    &.small {
         @include text-style-link-small;
     }
-    .extra-small {
+    &.extra-small {
         @include text-style-link-extra-small;
     }
 }

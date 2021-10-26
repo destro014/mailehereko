@@ -59,7 +59,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'Card',
-  props: ['hasAction', 'action', 'actionName', 'item'],
+  props: ['hasAction', 'action', 'actionName', 'item', 'admin'],
   data() {
     return {
       successClass: null,
@@ -97,11 +97,19 @@ export default {
           .doc(this.item.id + this.item.media_type)
           .set(data)
           .then((doc) => {
-            this.newActionName = 'Added'
-            this.newAction = 'added'
-            this.actionPending = false
-            this.successClass = 'success'
-            console.log('added succesfully')
+            if (this.admin) {
+              this.$fire.firestore
+                .collection('suggestions')
+                .doc(this.item.id + this.item.media_type)
+                .delete()
+                .then(() => {
+                  this.newActionName = 'Added'
+                  this.newAction = 'added'
+                  this.actionPending = false
+                  this.successClass = 'success'
+                  console.log('added succesfully')
+                })
+            }
           })
       }
       if (this.newAction == 'thumbs-up') {
