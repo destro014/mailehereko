@@ -1,7 +1,12 @@
 <template>
   <div class="movie-details-page page container">
-    <DetailsHeader :details="item" type="movie" />
-    <DetailsWrapper :details="item" type="movie" />
+    <!-- <p v-if="$fetchState.error">
+      <NotFound />
+    </p> -->
+    <div>
+      <DetailsHeader :details="item" type="movie" />
+      <DetailsWrapper :details="item" type="movie" />
+    </div>
   </div>
 </template>
 
@@ -111,9 +116,15 @@ export default {
         },
       }
     )
-    console.log(this.item)
+    if (this.$fetchState.error) {
+      this.$router.push('/404')
+    }
   },
-  mounted() {},
+  mounted() {
+    if (this.$fetchState.error) {
+      this.$router.push('/404')
+    }
+  },
 }
 </script>
 

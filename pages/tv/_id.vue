@@ -111,6 +111,14 @@ export default {
         },
       }
     )
+    if (this.$fetchState.error) {
+      this.$router.push('/404')
+    }
+  },
+  mounted() {
+    if (this.$fetchState.error) {
+      this.$router.push('/404')
+    }
   },
 }
 </script>
