@@ -64,7 +64,6 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted')
     this.$store.dispatch('suggestions/getSuggestions')
   },
   computed: mapState({
