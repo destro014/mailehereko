@@ -40,8 +40,8 @@
     <div class="loader-container list-grid" v-if="loading">
       <CardLoader :hasAction="false" v-for="index in 8" :key="index" />
     </div>
-    <!-- [ -->
-    <!-- <p
+    <!-- [
+    <p
       :hasAction="false"
       v-for="item in filteredList"
       :key="item.id"
