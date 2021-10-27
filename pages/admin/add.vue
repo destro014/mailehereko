@@ -52,7 +52,7 @@ export default {
   name: 'AddNew',
   head() {
     return {
-      title: 'Add new item',
+      title: 'Add new item - ',
     }
   },
   data() {

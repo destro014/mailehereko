@@ -32,10 +32,10 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'admin',
+  name: 'Admin',
   head() {
     return {
-      title: 'admin - ',
+      title: 'Admin - ',
     }
   },
   mounted() {
