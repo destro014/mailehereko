@@ -71,7 +71,7 @@ export default {
   mounted() {
     this.newAction = this.action
     this.newActionName = this.actionName
-    if (this.action == 'thumbs-up' || this.action == 'add') {
+    if (this.action == 'thumbs-up' || this.action == 'plus') {
       this.lists.forEach((item) => {
         if (this.item.id == item.id) {
           this.successClass = 'success'
