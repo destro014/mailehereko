@@ -1,5 +1,7 @@
 <template>
-  <NotFound v-if="error.statusCode === 404" />
+  <div class="page">
+    <NotFound v-if="error.statusCode === 404" />
+  </div>
 </template>
 
 <script>

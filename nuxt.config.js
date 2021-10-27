@@ -206,7 +206,7 @@ export default {
   axios: {},
   sitemap: {
     hostname: 'https://mailehereko.pramodpoudel.com.np',
-    exclude: ['/bhitra', '/prasasan/*', '/prasasan'],
+    exclude: ['/login', '/admin/*', '/admin'],
     defaults: {
       priority: 0.7,
     },

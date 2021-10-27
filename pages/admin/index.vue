@@ -14,12 +14,12 @@
       <h5>Quick links</h5>
       <div class="links">
         <div class="suggestion-link-container link-container">
-          <NuxtLink class="quick-link" :to="{ name: 'prasasan-suggestions' }">
+          <NuxtLink class="quick-link" :to="{ name: 'admin-suggestions' }">
             <span>Suggestions </span>
           </NuxtLink>
         </div>
         <div class="add-link-container link-container">
-          <NuxtLink class="quick-link" :to="{ name: 'prasasan-add' }">
+          <NuxtLink class="quick-link" :to="{ name: 'admin-add' }">
             <span>Add </span>
           </NuxtLink>
         </div>
@@ -32,10 +32,10 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Prasasan',
+  name: 'admin',
   head() {
     return {
-      title: 'Prasasan - ',
+      title: 'admin - ',
     }
   },
   mounted() {

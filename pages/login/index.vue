@@ -109,7 +109,7 @@ export default {
             this.btnState = 'initial'
             this.btnLabel = 'Logged In'
             setTimeout(() => {
-              this.$router.push('/prasasan')
+              this.$router.push('/admin')
             }, 1000)
           })
           .catch((error) => {

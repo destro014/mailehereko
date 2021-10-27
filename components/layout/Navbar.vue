@@ -28,21 +28,21 @@
               </NuxtLink>
             </li>
             <li v-if="isLoggedIn">
-              <NuxtLink class="nav-link cta" :to="{ name: 'prasasan' }">
+              <NuxtLink class="nav-link cta" :to="{ name: 'admin' }">
                 <span>Dashboard </span>
               </NuxtLink>
             </li>
             <li v-if="isLoggedIn">
               <NuxtLink
                 class="nav-link cta"
-                :to="{ name: 'prasasan-suggestions' }"
+                :to="{ name: 'admin-suggestions' }"
               >
                 <span>Suggestions </span>
               </NuxtLink>
             </li>
 
             <li v-if="isLoggedIn">
-              <NuxtLink class="nav-link cta" :to="{ name: 'prasasan-add' }">
+              <NuxtLink class="nav-link cta" :to="{ name: 'admin-add' }">
                 <span>Add </span>
               </NuxtLink>
             </li>
@@ -104,7 +104,7 @@ export default {
       await this.$fire.auth
         .signOut()
         .then(() => {
-          this.$router.push('/bhitra')
+          this.$router.push('/login')
         })
         .catch((error) => {
           // An error happened.

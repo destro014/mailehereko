@@ -1,14 +1,14 @@
 export default function ({ store, route, redirect }) {
-  const adminRoute = /\/prasasan\/*/g
+  const adminRoute = /\/admin\/*/g
   const loginRoute = /\/login\/*/g
   if (route.path.match(adminRoute)) {
     if (!store.getters['users/isLoggedIn']) {
-      return redirect('/bhitra')
+      return redirect('/login')
     }
   }
   if (route.path.match(loginRoute)) {
     if (store.getters['users/isLoggedIn']) {
-      return redirect('/prasasan')
+      return redirect('/admin')
     }
   }
 }
