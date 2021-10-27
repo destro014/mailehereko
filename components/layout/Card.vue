@@ -102,14 +102,12 @@ export default {
                 .collection('suggestions')
                 .doc(this.item.id + this.item.media_type)
                 .delete()
-                .then(() => {
-                  this.newActionName = 'Added'
-                  this.newAction = 'added'
-                  this.actionPending = false
-                  this.successClass = 'success'
-                  console.log('added succesfully')
-                })
+                .then(() => {})
             }
+            this.newActionName = 'Added'
+            this.newAction = 'added'
+            this.actionPending = false
+            this.successClass = 'success'
           })
       }
       if (this.newAction == 'thumbs-up') {
