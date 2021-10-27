@@ -71,10 +71,9 @@ export default {
   mounted() {
     this.newAction = this.action
     this.newActionName = this.actionName
-    if (this.action == 'thumbs-up') {
+    if (this.action == 'thumbs-up' || this.action == 'add') {
       this.lists.forEach((item) => {
         if (this.item.id == item.id) {
-          console.log('voila')
           this.successClass = 'success'
           this.newActionName = 'Already watched'
           this.newAction = 'watched'
