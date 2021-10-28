@@ -1,8 +1,5 @@
 <template>
   <div class="movie-details-page page container">
-    <!-- <p v-if="$fetchState.error">
-      <NotFound />
-    </p> -->
     <div>
       <DetailsHeader :details="item" type="movie" />
       <DetailsWrapper :details="item" type="movie" />

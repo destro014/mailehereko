@@ -59,7 +59,9 @@
       <div class="run-time detail">
         <p class="label" v-if="type == 'movie'">Run time</p>
         <p class="label" v-if="type == 'tv'">Episode run time</p>
-        <p class="large" v-if="type == 'movie'">{{ details.runtime }}</p>
+        <p class="large" v-if="type == 'movie'">
+          {{ details.runtime }} minutes
+        </p>
         <p class="runtime-wrapper" v-if="type == 'tv'">
           <span
             class="run-time large"
@@ -68,6 +70,7 @@
           >
             {{ item }}
           </span>
+          minutes
         </p>
       </div>
       <div class="genres detail">
