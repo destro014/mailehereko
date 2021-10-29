@@ -5,7 +5,6 @@
         <NuxtLink :to="{ name: 'index' }"><Logo /> </NuxtLink>
       </div>
       <div class="menu-wrapper" :class="{ active: menuOpened }">
-        <div class="menu-bg" @click="menuClose"></div>
         <div class="menu-container">
           <div class="menu-close menu-item" @click="menuClick">
             <Icon name="close" />
