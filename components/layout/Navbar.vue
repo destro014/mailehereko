@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="bg-blur">
     <div class="navbar container">
       <div class="brand">
         <NuxtLink :to="{ name: 'index' }"><Logo /> </NuxtLink>

@@ -147,7 +147,12 @@ p {
     cursor: pointer;
     background: getColor(black-30);
 }
-
+@supports (backdrop-filter: blur(24px)) {
+    .bg-blur {
+        background: getColor(grey-900-80) !important;
+        backdrop-filter: blur(24px);
+    }
+}
 @media screen and (max-width: 1440px) {
     body {
         background-size: 1440px;

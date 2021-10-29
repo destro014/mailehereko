@@ -6,7 +6,7 @@
         :alt="details.original_title || details.original_name"
       />
     </div>
-    <div class="header-title-container">
+    <div class="header-title-container bg-blur">
       <div class="breadcrumb-container">
         <NuxtLink :to="{ name: 'index' }" class="breadcrumb-link-item"
           >MaileHereko</NuxtLink
