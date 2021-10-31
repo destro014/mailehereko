@@ -53,6 +53,11 @@
 <script>
 export default {
   name: 'Login',
+  head() {
+    return {
+      title: 'Login - ',
+    }
+  },
   data() {
     return {
       loginCredentials: {
