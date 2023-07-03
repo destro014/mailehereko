@@ -8,6 +8,7 @@
           href="https://pramodpoudel.com.np"
           class="external-links"
           target="_blank"
+          aria-label="Know more about pramod poudel"
           >Pramod Poudel</a
         >
         have watched till date. Explore what I have watched and also feel free
