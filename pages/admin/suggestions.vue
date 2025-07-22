@@ -49,35 +49,23 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-export default {
-  name: 'Suggestions',
-  head() {
-    return {
-      title: 'Suggestion - ',
-    }
-  },
-  data() {
-    return {
-      searchTerm: null,
-    }
-  },
-  mounted() {
-    this.$store.dispatch('suggestions/getSuggestions')
-  },
-  computed: mapState({
-    suggestions() {
-      return this.$store.state.suggestions.suggestions
-    },
-    manualSuggestions() {
-      return this.$store.state.suggestions.manualSuggestions
-    },
-    loading() {
-      return this.$store.state.suggestions.loading
-    },
-  }),
-}
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useSuggestionsStore } from '~/stores/suggestions'
+
+definePageMeta({
+  middleware: 'auth',
+})
+
+const suggestionsStore = useSuggestionsStore()
+
+onMounted(() => {
+  suggestionsStore.fetchSuggestions()
+})
+
+const suggestions = computed(() => suggestionsStore.suggestions)
+const manualSuggestions = computed(() => suggestionsStore.manualSuggestions)
+const loading = computed(() => suggestionsStore.loading)
 </script>
 
 <style></style>

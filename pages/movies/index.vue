@@ -44,132 +44,37 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+import { ref, watch, computed } from 'vue'
+import { useListsStore } from '~/stores/lists'
+import { useTypeStore } from '~/stores/type'
+import { useSearchStore } from '~/stores/search'
 
-export default {
-  head() {
-    return {
-      title: 'Movies - ',
-      meta: [
-        {
-          hid: 'title',
-          name: 'title',
-          content: 'MaileHereko - Movies',
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Movies watched by Pramod Poudel',
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content:
-            'mailehereko, movies, tvshows, tv series, movies to watch, pramod poudel',
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'MaileHereko - Movies',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Movies watched by Pramod Poudel',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.png',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://mailehereko.pramodpoudel.com.np/movies',
-        },
+const listsStore = useListsStore()
+const typeStore = useTypeStore()
+const searchStore = useSearchStore()
 
-        { hid: 'og:locale', property: 'og:locale', content: 'en_EN' },
+const searchTerm = ref(searchStore.searchTerm)
 
-        {
-          hid: 'og:site_name',
-          property: 'og:site_name',
-          content: 'MaileHereko',
-        },
+watch(searchTerm, (val) => {
+  searchStore.setSearchTerm(val)
+})
 
-        { hid: 'og:type', property: 'og:type', content: 'website' },
+const stateSearchTerm = computed(() => searchStore.searchTerm)
+const listTitle = computed(() => typeStore.listTitle)
+const listType = computed(() => typeStore.listType)
+const lists = computed(() => listsStore.lists)
+const loading = computed(() => listsStore.loading)
 
-        { hid: 'twitter:site', name: 'twitter:site', content: '@destro014' },
-
-        {
-          hid: 'twitter:card',
-          property: 'twitter:card',
-          content: 'summary_large_image',
-        },
-
-        {
-          hid: 'twitter:url',
-          property: 'twitter:url',
-          content: 'https://twitter.com/destro014',
-        },
-
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: 'MaileHereko - Movies',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: 'Movies watched by Pramod Poudel',
-        },
-        {
-          hid: 'twitter:image',
-          property: 'twitter:image',
-          content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-movies.png',
-        },
-      ],
+const filteredList = computed(() => {
+  return lists.value.filter((item) => {
+    if (item.media_type === 'movie') {
+      return item.original_title
+        .toLowerCase()
+        .includes(stateSearchTerm.value.toLowerCase())
     }
-  },
-  data() {
-    return {
-      searchTerm: null,
-    }
-  },
-  watch: {
-    searchTerm: function (val, oldVal) {
-      this.$store.dispatch('search/setSearchTerm', this.searchTerm)
-    },
-  },
-  computed: mapState({
-    stateSearchTerm() {
-      return this.$store.state.search.searchTerm
-    },
-    listTitle() {
-      return this.$store.state.type.listTitle
-    },
-    listType() {
-      return this.$store.state.type.listType
-    },
-    lists() {
-      return this.$store.state.lists.lists
-    },
-    loading() {
-      return this.$store.state.lists.loading
-    },
-    filteredList() {
-      return this.lists.filter((item) => {
-        if (item.media_type == 'movie') {
-          return item.original_title
-            .toLowerCase()
-            .includes(this.stateSearchTerm.toLowerCase())
-        }
-      })
-    },
-  }),
-}
+  })
+})
 </script>
 
 <style></style>

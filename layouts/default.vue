@@ -2,16 +2,17 @@
   <div class="default-view">
     <div class="status-bar"></div>
     <Navbar />
-    <Nuxt keep-alive />
+    <NuxtPage keep-alive />
     <Footer />
   </div>
 </template>
-<script>
-export default {
-  name: 'default',
-  mounted() {
-    this.$store.dispatch('lists/getLists')
-  },
-}
+<script setup>
+import { onMounted } from 'vue'
+import { useListsStore } from '~/stores/lists'
+
+const listsStore = useListsStore()
+onMounted(() => {
+  listsStore.fetchLists()
+})
 </script>
 <style></style>

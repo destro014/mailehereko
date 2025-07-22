@@ -62,86 +62,52 @@
   </nav>
 </template>
 
-<script>
-import { mapState, mapGetters } from 'vuex'
+<script setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useUsersStore } from '~/stores/users'
 
-export default {
-  name: 'Navbar',
-  data() {
-    return {
-      menuOpened: false,
-      actionActive: false,
-      blah: '0',
-      windowWidth: null,
-    }
-  },
-  methods: {
-    menuClick() {
-      this.menuOpened = !this.menuOpened
-      if (this.menuOpened) {
-        document.body.style.overflowY = 'hidden'
-      } else {
-        document.body.style.overflowY = 'visible'
-      }
-    },
-    menuClose() {
-      this.menuOpened = false
-      document.body.style.overflowY = 'visible'
-    },
-    handleResize() {
-      this.windowWidth = window.innerWidth
-      if (this.windowWidth < 767) {
-        this.menuOpened = false
-        document.body.style.overflowY = 'visible'
-        this.actionActive = true
-      } else {
-        this.menuOpened = true
-        this.actionActive = false
-      }
-    },
-    async logout() {
-      await this.$fire.auth
-        .signOut()
-        .then(() => {
-          this.$router.push('/login')
-        })
-        .catch((error) => {
-          // An error happened.
-        })
-    },
-  },
-  mounted() {
-    this.windowWidth = window.innerWidth
-    if (this.windowWidth < 767) {
-      this.menuOpened = false
-      this.actionActive = true
+const usersStore = useUsersStore()
+const isLoggedIn = computed(() => usersStore.isLoggedIn)
+const authUser = computed(() => usersStore.authUser)
 
-      document.body.style.overflowY = 'visible'
-    } else {
-      this.menuOpened = true
-      this.actionActive = false
-    }
-    window.addEventListener('resize', this.handleResize)
-  },
-  watch: {
-    $route(to, from) {
-      this.menuOpened = false
-      this.actionActive = false
-      document.body.style.overflowY = 'visible'
-    },
-  },
-  destroyed() {
-    window.removeEventListener('resize', this.handleResize)
-  },
-  computed: {
-    ...mapState({
-      authUser: (state) => state.users.authUser,
-    }),
-    ...mapGetters({
-      isLoggedIn: 'users/isLoggedIn',
-    }),
-  },
+const menuOpened = ref(false)
+const actionActive = ref(false)
+const windowWidth = ref(null)
+
+function menuClick() {
+  menuOpened.value = !menuOpened.value
+  document.body.style.overflowY = menuOpened.value ? 'hidden' : 'visible'
 }
+function menuClose() {
+  menuOpened.value = false
+  document.body.style.overflowY = 'visible'
+}
+function handleResize() {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value < 767) {
+    menuOpened.value = false
+    document.body.style.overflowY = 'visible'
+    actionActive.value = true
+  } else {
+    menuOpened.value = true
+    actionActive.value = false
+  }
+}
+onMounted(() => {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value < 767) {
+    menuOpened.value = false
+    actionActive.value = true
+    document.body.style.overflowY = 'visible'
+  } else {
+    menuOpened.value = true
+    actionActive.value = false
+  }
+  window.addEventListener('resize', handleResize)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style></style>

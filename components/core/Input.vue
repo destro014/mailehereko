@@ -10,8 +10,8 @@
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :required="required"
-      v-model="value"
-      @input="$emit('update:value', value)"
+      :value="modelValue"
+      @input="onInput"
     />
     <label :for="name">{{ label }}</label>
     <div
@@ -32,57 +32,52 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Input',
-  props: [
-    'type',
-    'name',
-    'isPassword',
-    'autocomplete',
-    'label',
-    'placeholder',
-    'required',
-    'leftIcon',
-    'rightIcon',
-    'hasFeedback',
-    'feedback',
-    'state',
-  ],
-  data() {
-    return {
-      value: null,
-      className: null,
-      newRightIcon: null,
-      newType: null,
-      clickable: null,
-    }
-  },
-  beforeMount() {
-    if (this.isPassword) {
-      this.clickable = true
-    }
-    if (this.valid) {
-      this.className = 'success'
-    } else if (this.valid == null) {
-      this.className = ''
-    } else {
-      this.className = 'error'
-    }
-    this.newType = this.type
-    this.newRightIcon = this.rightIcon
-  },
-  methods: {
-    togglePassword() {
-      if (this.newType == 'password') {
-        this.newType = 'text'
-        this.newRightIcon = 'eye-close'
-      } else {
-        this.newType = 'password'
-        this.newRightIcon = 'eye-open'
-      }
-    },
-  },
+<script setup>
+import { ref, watch, computed } from 'vue'
+
+const props = defineProps({
+  modelValue: String,
+  type: String,
+  name: String,
+  isPassword: Boolean,
+  autocomplete: String,
+  label: String,
+  placeholder: String,
+  required: [String, Boolean],
+  leftIcon: String,
+  rightIcon: String,
+  hasFeedback: Boolean,
+  feedback: String,
+  state: String,
+})
+const emit = defineEmits(['update:modelValue'])
+
+const value = ref(props.modelValue)
+watch(
+  () => props.modelValue,
+  (val) => {
+    value.value = val
+  }
+)
+
+function onInput(e) {
+  emit('update:modelValue', e.target.value)
+}
+
+const clickable = ref(false)
+const newRightIcon = ref(props.rightIcon)
+const newType = ref(props.type)
+
+if (props.isPassword) clickable.value = true
+
+function togglePassword() {
+  if (newType.value === 'password') {
+    newType.value = 'text'
+    newRightIcon.value = 'eye-close'
+  } else {
+    newType.value = 'password'
+    newRightIcon.value = 'eye-open'
+  }
 }
 </script>
 
