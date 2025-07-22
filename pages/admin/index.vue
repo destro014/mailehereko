@@ -28,44 +28,29 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+definePageMeta({
+  middleware: 'auth',
+})
+import { computed } from 'vue'
+import { useListsStore } from '~/stores/lists'
+import { useSuggestionsStore } from '~/stores/suggestions'
 
-export default {
-  name: 'Admin',
-  head() {
-    return {
-      title: 'Admin - ',
-    }
-  },
-  mounted() {
-    this.$store.dispatch('suggestions/getSuggestions')
-  },
-  computed: mapState({
-    loading() {
-      return this.$store.state.lists.loading
-    },
-    lists() {
-      return this.$store.state.lists.lists
-    },
-    moviesCount() {
-      return this.lists.filter((item) => {
-        return item.media_type.includes('movie')
-      }).length
-    },
-    tvShowsCount() {
-      return this.lists.filter((item) => {
-        return item.media_type.includes('tv')
-      }).length
-    },
-    suggestionsCount() {
-      return this.$store.state.suggestions.suggestions.length
-    },
-    manualSuggestionsCount() {
-      return this.$store.state.suggestions.manualSuggestions.length
-    },
-  }),
-}
+const listsStore = useListsStore()
+const suggestionsStore = useSuggestionsStore()
+
+const loading = computed(() => listsStore.loading)
+const lists = computed(() => listsStore.lists)
+const moviesCount = computed(
+  () => lists.value.filter((item) => item.media_type.includes('movie')).length
+)
+const tvShowsCount = computed(
+  () => lists.value.filter((item) => item.media_type.includes('tv')).length
+)
+const suggestionsCount = computed(() => suggestionsStore.suggestions.length)
+const manualSuggestionsCount = computed(
+  () => suggestionsStore.manualSuggestions.length
+)
 </script>
 
 <style></style>

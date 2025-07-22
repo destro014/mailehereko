@@ -45,76 +45,62 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script setup>
+definePageMeta({
+  middleware: 'auth',
+})
+import { ref, reactive } from 'vue'
 
-export default {
-  name: 'AddNew',
-  head() {
-    return {
-      title: 'Add new item - ',
+const searchTerm = ref('')
+const searchResults = ref([])
+const loading = ref(false)
+const moreAvailable = ref(false)
+const noResults = ref(false)
+const pageCount = ref(1)
+const btnState = ref('initial')
+const loadMoreBtnState = ref('initial')
+const btnLabel = ref('Search')
+const loadMoreBtnLabel = ref('Load More')
+const baseUrl = 'https://api.themoviedb.org/3/search/multi'
+
+async function search() {
+  btnState.value = 'loading'
+  loading.value = true
+  noResults.value = false
+  searchResults.value = []
+  pageCount.value = 1
+  await searchQuery()
+}
+
+async function searchQuery() {
+  const { data: result } = await useFetch(baseUrl, {
+    params: {
+      page: pageCount.value,
+      api_key: process.env.TMDB_API_KEY,
+      query: searchTerm.value,
+    },
+  })
+  if (result.value) {
+    searchResults.value.push(
+      ...result.value.results.filter((item) => item.media_type != 'person')
+    )
+    if (result.value.total_results == 0) {
+      noResults.value = true
     }
-  },
-  data() {
-    return {
-      searchTerm: null,
-      searchResults: [],
-      loading: false,
-      moreAvailable: false,
-      noResults: false,
-      pageCount: 1,
-      btnState: 'initial',
-      loadMoreBtnState: 'initial',
-      btnLabel: 'Search',
-      loadMoreBtnLabel: 'Load More',
-      baseUrl: 'https://api.themoviedb.org/3/search/multi',
+    if (result.value.page < result.value.total_pages) {
+      moreAvailable.value = true
+    } else {
+      moreAvailable.value = false
     }
-  },
-  mounted() {},
-  methods: {
-    async search() {
-      this.btnState = 'loading'
-      this.loading = true
-      this.noResults = false
-      this.searchResults = []
-      this.pageCount = 1
-      await this.searchQuery()
-    },
-    async searchQuery() {
-      const result = await this.$axios.$get(
-        'https://api.themoviedb.org/3/search/multi',
-        {
-          params: {
-            page: this.pageCount,
-            api_key: process.env.TMDB_API_KEY,
-            query: this.searchTerm,
-          },
-        }
-      )
-      this.searchResults.push(
-        ...result.results.filter((item) => {
-          if (item.media_type != 'person') {
-            return item
-          }
-        })
-      )
-      if (result.total_results == 0) {
-        this.noResults = true
-      }
-      if (result.page < result.total_pages) {
-        this.moreAvailable = true
-      } else {
-        this.moreAvailable = false
-      }
-      this.loading = false
-      this.btnState = 'initial'
-    },
-    async loadMore() {
-      this.pageCount += 1
-      this.loading = true
-      await this.searchQuery()
-    },
-  },
+  }
+  loading.value = false
+  btnState.value = 'initial'
+}
+
+async function loadMore() {
+  pageCount.value += 1
+  loading.value = true
+  await searchQuery()
 }
 </script>
 
