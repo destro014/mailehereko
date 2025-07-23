@@ -3,14 +3,15 @@ import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
 export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig()
   const firebaseConfig = {
-    apiKey: 'AIzaSyB44XmaAnabd4adYctoCxBWar2OEEF41TQ',
-    authDomain: 'mailehereko.firebaseapp.com',
+    apiKey: config.public.FIREBASE_API_KEY,
+    authDomain: config.public.FIREBASE_AUTH_DOMAIN,
     databaseURL: '<replace this>',
-    projectId: 'mailehereko',
-    storageBucket: 'mailehereko.appspot.com',
-    messagingSenderId: '823471565644',
-    appId: '1:823471565644:web:5632e4f8c236ddb4a8bde9',
+    projectId: config.public.FIREBASE_PROJECT_ID,
+    storageBucket: config.public.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: config.public.FIREBASE_MESSAGING_SENDER_ID,
+    appId: config.public.FIREBASE_APP_ID,
   }
   let firebaseApp
   const apps = getApps()
