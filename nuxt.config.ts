@@ -107,48 +107,42 @@ export default defineNuxtConfig({
   },
 
   // Nuxt 3: Modules must be Nuxt 3 compatible. Add only compatible ones here.
-  modules: ['@pinia/nuxt', 'nuxt-simple-sitemap'],
-  sitemap: {
-    siteUrl: 'https://mailehereko.pramodpoudel.com.np',
-    async urls() {
-      // Initialize Firebase (server-side, so use env vars directly)
-      const firebaseConfig = {
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        appId: process.env.FIREBASE_APP_ID,
+  modules: [
+    '@pinia/nuxt',
+    ['@nuxtjs/sitemap', {
+      siteUrl: 'https://mailehereko.pramodpoudel.com.np',
+      async routes() {
+        const firebaseConfig = {
+          apiKey: process.env.FIREBASE_API_KEY,
+          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+          appId: process.env.FIREBASE_APP_ID,
+        }
+        let firebaseApp
+        const apps = getApps()
+        if (!apps.length) {
+          firebaseApp = initializeApp(firebaseConfig)
+        } else {
+          firebaseApp = apps[0]
+        }
+        const db = getFirestore(firebaseApp)
+        const movieSnap = await getDocs(collection(db, 'movies'))
+        const tvSnap = await getDocs(collection(db, 'tvshows'))
+        const movieRoutes = movieSnap.docs.map(doc => `/movie/${doc.id}`)
+        const tvRoutes = tvSnap.docs.map(doc => `/tv/${doc.id}`)
+        return [
+          '/',
+          '/movies',
+          '/tvshows',
+          '/suggest',
+          ...movieRoutes,
+          ...tvRoutes,
+        ]
       }
-      let firebaseApp
-      const apps = getApps()
-      if (!apps.length) {
-        firebaseApp = initializeApp(firebaseConfig)
-      } else {
-        firebaseApp = apps[0]
-      }
-      const db = getFirestore(firebaseApp)
-
-      // Fetch movie and tv IDs from Firestore
-      const movieSnap = await getDocs(collection(db, 'movies'))
-      const tvSnap = await getDocs(collection(db, 'tvshows'))
-
-      const movieRoutes = movieSnap.docs.map((doc) => ({
-        loc: `/movie/${doc.id}`,
-      }))
-      const tvRoutes = tvSnap.docs.map((doc) => ({ loc: `/tv/${doc.id}` }))
-
-      return [
-        { loc: '/' },
-        { loc: '/movies' },
-        { loc: '/tvshows' },
-        { loc: '/suggest' },
-        ...movieRoutes,
-        ...tvRoutes,
-      ]
-    },
-  },
-
+    }],
+  ],
   // PWA, sitemap, and firebase configs need Nuxt 3 compatible modules/plugins
   // Add their config here if/when you add Nuxt 3 compatible modules
   // build, generate, router, and other advanced options need review for Nuxt 3 compatibility
