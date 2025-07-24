@@ -1,1 +1,0 @@
-function g({store:t,route:n,redirect:i}){const e=/\/admin\/*/g,a=/\/login\/*/g;if(n.path.match(e)&&!t.getters["users/isLoggedIn"])return i("/login");if(n.path.match(a)&&t.getters["users/isLoggedIn"])return i("/admin")}export{g as default};
