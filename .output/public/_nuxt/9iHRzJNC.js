@@ -1,0 +1,1 @@
+import{U as a,I as o,W as e,X as n}from"./CJZBxJVY.js";const d=a("lists",{state:()=>({lists:[],loading:!0}),getters:{getLists:s=>s.lists,isLoading:s=>s.loading},actions:{async fetchLists(){this.loading=!0;const{$db:s}=o(),t=await e(n(s,"lists"));this.lists=t.docs.map(i=>i.data()),this.loading=!1},setLists(s){this.lists=s},setLoading(s){this.loading=s}}});export{d as u};

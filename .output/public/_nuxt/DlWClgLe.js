@@ -1,0 +1,1 @@
+import{Y as e,m as r}from"./CJZBxJVY.js";import{u as s}from"./BZafJiMA.js";const u=e(t=>{if(t.path==="/sitemap.xml"||t.path==="/robots.txt")return;if(!s().isLoggedIn)return r("/login")});export{u as default};

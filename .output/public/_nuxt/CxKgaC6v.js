@@ -1,0 +1,1 @@
+import{_ as o,$ as s,c as a,o as n,a as c,b as r}from"./CJZBxJVY.js";const l={name:"fullpage"},p={class:"container"};function _(u,e,d,i,f,m){const t=s("Nuxt");return n(),a("div",p,[e[0]||(e[0]=c("div",{class:"status-bar container"},null,-1)),r(t)])}const $=o(l,[["render",_]]);export{$ as default};
