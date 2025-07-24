@@ -1,0 +1,1 @@
+import{a as r}from"./Bm6eBqVA.js";import{_ as n,$ as a,c,o as s,b as o}from"./CtGbp5Wy.js";import"./CLZ_eMg9.js";import"./vontwHf2.js";import"./y3NjJr3W.js";const p={};function _(m,i,f,u,l,d){const t=r,e=a("Nuxt");return s(),c("div",null,[o(t),o(e)])}const k=n(p,[["render",_]]);export{k as default};
