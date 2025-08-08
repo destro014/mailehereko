@@ -11,10 +11,14 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useListsStore } from '~/stores/lists'
+import { useUsersStore } from '~/stores/users'
 
 const listsStore = useListsStore()
+const usersStore = useUsersStore()
+
 onMounted(() => {
   listsStore.fetchLists()
+  usersStore.initAuthListener()
 })
 </script>
 <style></style>

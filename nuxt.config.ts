@@ -102,95 +102,12 @@ export default defineNuxtConfig({
       FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
       FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-      TMDB_API_KEY: process.env.TMDB_API_KEY,
+      TMDB_API_KEY: process.env.TMDB_API_KEY, // moved back to public
     },
   },
 
   // Nuxt 3: Modules must be Nuxt 3 compatible. Add only compatible ones here.
   modules: ['@pinia/nuxt', '@nuxtjs/sitemap'],
-  sitemap: {
-    sitemapsPathPrefix: '/',
-    sitemapIndexFilename: 'sitemap.xml', // <-- This makes the index available at /sitemap.xml
-    sitemaps: {
-      movies: {
-        excludeAppSources: true,
-        urls: async () => {
-          const firebaseConfig = {
-            apiKey: process.env.FIREBASE_API_KEY,
-            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-            projectId: process.env.FIREBASE_PROJECT_ID,
-            storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-            appId: process.env.FIREBASE_APP_ID,
-          }
-          let firebaseApp
-          const apps = getApps()
-          if (!apps.length) {
-            firebaseApp = initializeApp(firebaseConfig)
-          } else {
-            firebaseApp = apps[0]
-          }
-          const db = getFirestore(firebaseApp)
-          const listsSnap = await getDocs(collection(db, 'lists'))
-          const urls = []
-          listsSnap.docs.forEach((doc) => {
-            const id = doc.id
-            if (id.endsWith('movie')) {
-              const movieId = id.replace(/movie$/, '')
-              urls.push({ loc: `/movie/${movieId}` })
-            }
-          })
-          urls.push({ loc: '/' }, { loc: '/movies' })
-          return urls
-        },
-      },
-      tvshows: {
-        excludeAppSources: true,
-        urls: async () => {
-          const firebaseConfig = {
-            apiKey: process.env.FIREBASE_API_KEY,
-            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-            projectId: process.env.FIREBASE_PROJECT_ID,
-            storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-            appId: process.env.FIREBASE_APP_ID,
-          }
-          let firebaseApp
-          const apps = getApps()
-          if (!apps.length) {
-            firebaseApp = initializeApp(firebaseConfig)
-          } else {
-            firebaseApp = apps[0]
-          }
-          const db = getFirestore(firebaseApp)
-          const listsSnap = await getDocs(collection(db, 'lists'))
-          const urls = []
-          listsSnap.docs.forEach((doc) => {
-            const id = doc.id
-            if (id.endsWith('tv')) {
-              const tvId = id.replace(/tv$/, '')
-              urls.push({ loc: `/tv/${tvId}` })
-            }
-          })
-          urls.push({ loc: '/' }, { loc: '/tvshows' })
-          return urls
-        },
-      },
-      pages: {
-        exclude: ['/login', '/admin', '/admin/**'],
-        excludeAppSources: true,
-        urls: async () => [
-          { loc: '/' },
-          { loc: '/movies' },
-          { loc: '/tvshows' },
-          { loc: '/suggest' },
-        ],
-      },
-    },
-  },
-  // PWA, sitemap, and firebase configs need Nuxt 3 compatible modules/plugins
-  // Add their config here if/when you add Nuxt 3 compatible modules
-  // build, generate, router, and other advanced options need review for Nuxt 3 compatibility
   postcss: {
     plugins: {
       autoprefixer: {},
@@ -203,3 +120,84 @@ export default defineNuxtConfig({
     },
   },
 })
+
+export const sitemap = {
+  sitemapsPathPrefix: '/',
+  sitemapIndexFilename: 'sitemap.xml',
+  sitemaps: {
+    movies: {
+      excludeAppSources: true,
+      urls: async () => {
+        const firebaseConfig = {
+          apiKey: process.env.FIREBASE_API_KEY,
+          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+          appId: process.env.FIREBASE_APP_ID,
+        }
+        let firebaseApp
+        const apps = getApps()
+        if (!apps.length) {
+          firebaseApp = initializeApp(firebaseConfig)
+        } else {
+          firebaseApp = apps[0]
+        }
+        const db = getFirestore(firebaseApp)
+        const listsSnap = await getDocs(collection(db, 'lists'))
+        const urls = []
+        listsSnap.docs.forEach((doc) => {
+          const id = doc.id
+          if (id.endsWith('movie')) {
+            const movieId = id.replace(/movie$/, '')
+            urls.push({ loc: `/movie/${movieId}` })
+          }
+        })
+        urls.push({ loc: '/' }, { loc: '/movies' })
+        return urls
+      },
+    },
+    tvshows: {
+      excludeAppSources: true,
+      urls: async () => {
+        const firebaseConfig = {
+          apiKey: process.env.FIREBASE_API_KEY,
+          authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+          appId: process.env.FIREBASE_APP_ID,
+        }
+        let firebaseApp
+        const apps = getApps()
+        if (!apps.length) {
+          firebaseApp = initializeApp(firebaseConfig)
+        } else {
+          firebaseApp = apps[0]
+        }
+        const db = getFirestore(firebaseApp)
+        const listsSnap = await getDocs(collection(db, 'lists'))
+        const urls = []
+        listsSnap.docs.forEach((doc) => {
+          const id = doc.id
+          if (id.endsWith('tv')) {
+            const tvId = id.replace(/tv$/, '')
+            urls.push({ loc: `/tv/${tvId}` })
+          }
+        })
+        urls.push({ loc: '/' }, { loc: '/tvshows' })
+        return urls
+      },
+    },
+    pages: {
+      exclude: ['/login', '/admin', '/admin/**'],
+      excludeAppSources: true,
+      urls: async () => [
+        { loc: '/' },
+        { loc: '/movies' },
+        { loc: '/tvshows' },
+        { loc: '/suggest' },
+      ],
+    },
+  },
+}

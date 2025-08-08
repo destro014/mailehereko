@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { collection, getDocs } from 'firebase/firestore'
-import { useNuxtApp } from '#app'
+import { useNuxtApp } from 'nuxt/app'
 
 export const useSuggestionsStore = defineStore('suggestions', {
   state: () => ({

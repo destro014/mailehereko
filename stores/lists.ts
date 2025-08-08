@@ -15,7 +15,9 @@ export const useListsStore = defineStore('lists', {
     async fetchLists() {
       this.loading = true
       const { $db } = useNuxtApp()
-      const querySnapshot = await getDocs(collection($db as Firestore, 'lists'))
+      const querySnapshot = await getDocs(
+        collection($db as Firestore, 'watchedList')
+      )
       this.lists = querySnapshot.docs.map((doc) => doc.data())
       this.loading = false
     },

@@ -65,14 +65,26 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useUsersStore } from '~/stores/users'
+import { useRouter } from 'vue-router'
 
 const usersStore = useUsersStore()
+const router = useRouter()
 const isLoggedIn = computed(() => usersStore.isLoggedIn)
 const authUser = computed(() => usersStore.authUser)
 
 const menuOpened = ref(false)
 const actionActive = ref(false)
 const windowWidth = ref(null)
+
+async function logout() {
+  try {
+    await usersStore.logout()
+    // Redirect to home page after logout
+    await router.push('/')
+  } catch (error) {
+    console.error('Logout error:', error)
+  }
+}
 
 function menuClick() {
   menuOpened.value = !menuOpened.value

@@ -8,7 +8,7 @@
         left: leftValue + 'rem',
       }"
     ></div>
-    <div class="segmented-group" :ref="label1">
+    <div class="segmented-group" ref="label1Ref">
       <input
         type="radio"
         name="List Type"
@@ -20,7 +20,7 @@
       />
       <label :for="value1" class="segmented-label"> {{ label1Text }} </label>
     </div>
-    <div class="segmented-group" :ref="label2">
+    <div class="segmented-group" ref="label2Ref">
       <input
         type="radio"
         name="List Type"
@@ -32,7 +32,7 @@
       />
       <label :for="value2" class="segmented-label"> {{ label2Text }} </label>
     </div>
-    <div class="segmented-group" :ref="label3">
+    <div class="segmented-group" ref="label3Ref">
       <input
         type="radio"
         name="List Type"
@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useTypeStore } from '~/stores/type'
 
 const typeStore = useTypeStore()
@@ -58,14 +58,14 @@ const listType = computed({
   set: (value) => typeStore.setListType(value),
 })
 
-const label1 = ref(null)
-const label2 = ref(null)
-const label3 = ref(null)
-const indicatorWidth = ref(null)
-const width1 = ref(null)
-const width2 = ref(null)
-const width3 = ref(null)
-const leftValue = ref(null)
+const label1Ref = ref(null)
+const label2Ref = ref(null)
+const label3Ref = ref(null)
+const indicatorWidth = ref(0)
+const width1 = ref(0)
+const width2 = ref(0)
+const width3 = ref(0)
+const leftValue = ref(0)
 
 function updateType() {
   if (listType.value == 'all') {
@@ -80,10 +80,22 @@ function updateType() {
   }
 }
 
+function updateWidths() {
+  if (label1Ref.value) width1.value = label1Ref.value.clientWidth
+  if (label2Ref.value) width2.value = label2Ref.value.clientWidth
+  if (label3Ref.value) width3.value = label3Ref.value.clientWidth
+  updateType()
+}
+
 onMounted(() => {
-  width1.value = label1.value?.clientWidth
-  width2.value = label2.value?.clientWidth
-  width3.value = label3.value?.clientWidth
+  // Wait for next tick to ensure DOM is rendered
+  nextTick(() => {
+    updateWidths()
+  })
+})
+
+// Watch for changes in listType to update indicator
+watch(listType, () => {
   updateType()
 })
 

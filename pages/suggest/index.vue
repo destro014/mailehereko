@@ -13,7 +13,7 @@
           label="Search"
           placeholder="eg. Avenger"
           leftIcon="search"
-          v-bind:value.sync="searchTerm"
+          v-model="searchTerm"
           required="required"
           keep-alive
         />
@@ -38,7 +38,7 @@
       <Button
         :label="loadMoreBtnLabel"
         :state="loadMoreBtnState"
-        @click.native="loadMore"
+        @click="loadMore"
       ></Button>
     </div>
     <div class="no-results-container" v-if="noResults">
@@ -50,7 +50,7 @@
       <Button
         class="cta-btn"
         label="Suggest Manually"
-        @click.native="manualSuggestion"
+        @click="manualSuggestion"
       ></Button>
     </div>
     <div class="no-results-container" v-if="nothingFound">
@@ -59,7 +59,7 @@
       <Button
         class="cta-btn"
         label="Suggest Manually"
-        @click.native="manualSuggestion"
+        @click="manualSuggestion"
       ></Button>
     </div>
     <SuggestionCompletePopup
@@ -74,172 +74,141 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Suggest',
-  head() {
-    return {
-      title: 'Suggest - ',
-      meta: [
-        {
-          hid: 'title',
-          name: 'title',
-          content: 'MaileHereko - Suggest',
-        },
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Suggest some TV Shows and movies to watch',
-        },
-        {
-          hid: 'keywords',
-          name: 'keywords',
-          content:
-            'mailehereko, movies, tvshows, tv series, movies to watch, pramod poudel',
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          content: 'MaileHereko - Suggest',
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          content: 'Suggest some TV Shows and movies to watch',
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-suggest.png',
-        },
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          content: 'https://mailehereko.pramodpoudel.com.np/suggest',
-        },
+<script setup>
+import { ref, watch, computed } from 'vue'
+import { useHead, useRuntimeConfig } from '#imports'
+import { useSuggestStore } from '~/stores/suggest'
 
-        { hid: 'og:locale', property: 'og:locale', content: 'en_EN' },
+const suggestStore = useSuggestStore()
 
-        {
-          hid: 'og:site_name',
-          property: 'og:site_name',
-          content: 'MaileHereko',
-        },
+const loading = ref(false)
+const moreAvailable = ref(false)
+const nothingFound = ref(false)
+const noResults = ref(false)
+const suggestionCompletePopupActive = ref(false)
+const manualSuggestionActive = ref(false)
+const btnState = ref('initial')
+const loadMoreBtnState = ref('initial')
+const btnLabel = ref('Search')
+const loadMoreBtnLabel = ref('Load More')
 
-        { hid: 'og:type', property: 'og:type', content: 'website' },
+const config = useRuntimeConfig()
+const TMDB_API_KEY = config.public.TMDB_API_KEY
 
-        { hid: 'twitter:site', name: 'twitter:site', content: '@destro014' },
+// Use store state for searchTerm, searchResults, pageCount
+const searchTerm = computed({
+  get: () => suggestStore.searchTerm,
+  set: (val) => suggestStore.setSearchTerm(val),
+})
+const searchResults = computed(() => suggestStore.searchResults)
+const pageCount = computed({
+  get: () => suggestStore.pageCount,
+  set: (val) => suggestStore.setPageCount(val),
+})
 
-        {
-          hid: 'twitter:card',
-          property: 'twitter:card',
-          content: 'summary_large_image',
-        },
+useHead({
+  title: 'Suggest - ',
+  meta: [
+    { name: 'title', content: 'MaileHereko - Suggest' },
+    {
+      name: 'description',
+      content: 'Suggest some TV Shows and movies to watch',
+    },
+    {
+      name: 'keywords',
+      content:
+        'mailehereko, movies, tvshows, tv series, movies to watch, pramod poudel',
+    },
+    { property: 'og:title', content: 'MaileHereko - Suggest' },
+    {
+      property: 'og:description',
+      content: 'Suggest some TV Shows and movies to watch',
+    },
+    {
+      property: 'og:image',
+      content: 'https://mailehereko.pramodpoudel.com.np/img/banner-suggest.png',
+    },
+    {
+      property: 'og:url',
+      content: 'https://mailehereko.pramodpoudel.com.np/suggest',
+    },
+    { property: 'og:locale', content: 'en_EN' },
+    { property: 'og:site_name', content: 'MaileHereko' },
+    { property: 'og:type', content: 'website' },
+    { name: 'twitter:site', content: '@destro014' },
+    { property: 'twitter:card', content: 'summary_large_image' },
+    { property: 'twitter:url', content: 'https://twitter.com/destro014' },
+    { property: 'twitter:title', content: 'MaileHereko - Suggest' },
+    {
+      property: 'twitter:description',
+      content: 'Suggest some TV Shows and movies to watch',
+    },
+    {
+      property: 'twitter:image',
+      content: 'https://mailehereko.pramodpoudel.com.np/img/banner-suggest.png',
+    },
+  ],
+})
 
-        {
-          hid: 'twitter:url',
-          property: 'twitter:url',
-          content: 'https://twitter.com/destro014',
-        },
+async function search() {
+  btnState.value = 'loading'
+  loading.value = true
+  noResults.value = false
+  suggestStore.setSearchResults([])
+  pageCount.value = 1
+  await searchQuery()
+}
 
-        {
-          hid: 'twitter:title',
-          property: 'twitter:title',
-          content: 'MaileHereko - Suggest',
-        },
-        {
-          hid: 'twitter:description',
-          property: 'twitter:description',
-          content: 'Suggest some TV Shows and movies to watch',
-        },
-        {
-          hid: 'twitter:image',
-          property: 'twitter:image',
-          content:
-            'https://mailehereko.pramodpoudel.com.np/img/banner-suggest.png',
-        },
-      ],
+async function searchQuery() {
+  try {
+    const url = `https://api.themoviedb.org/3/search/multi?page=${
+      pageCount.value
+    }&api_key=${TMDB_API_KEY}&query=${encodeURIComponent(searchTerm.value)}`
+    const res = await fetch(url)
+    const result = await res.json()
+    const newResults = (result.results || []).filter(
+      (item) => item.media_type !== 'person'
+    )
+    suggestStore.setSearchResults([...searchResults.value, ...newResults])
+    if (result.total_results === 0) {
+      noResults.value = true
+    } else if (result.page < result.total_pages) {
+      moreAvailable.value = true
+    } else {
+      moreAvailable.value = false
+      nothingFound.value = true
     }
-  },
-  data() {
-    return {
-      searchTerm: null,
-      searchResults: [],
-      loading: false,
-      moreAvailable: false,
-      nothingFound: false,
-      noResults: false,
-      suggestionCompletePopupActive: false,
-      manualSuggestionActive: false,
-      pageCount: 1,
-      btnState: 'initial',
-      loadMoreBtnState: 'initial',
-      btnLabel: 'Search',
-      loadMoreBtnLabel: 'Load More',
-      baseUrl: 'https://api.themoviedb.org/3/search/multi',
-    }
-  },
-  methods: {
-    async search() {
-      this.btnState = 'loading'
-      this.loading = true
-      this.noResults = false
-      this.searchResults = []
-      this.pageCount = 1
-      await this.searchQuery()
-    },
-    async searchQuery() {
-      const result = await this.$axios.$get(
-        'https://api.themoviedb.org/3/search/multi',
-        {
-          params: {
-            page: this.pageCount,
-            api_key: process.env.TMDB_API_KEY,
-            query: this.searchTerm,
-          },
-        }
-      )
-      this.searchResults.push(
-        ...result.results.filter((item) => {
-          if (item.media_type != 'person') {
-            return item
-          }
-        })
-      )
-      if (result.total_results == 0) {
-        this.noResults = true
-      } else if (result.page < result.total_pages) {
-        this.moreAvailable = true
-      } else {
-        this.moreAvailable = false
-        this.nothingFound = true
-      }
-      this.loading = false
-      this.btnState = 'initial'
-    },
-    async loadMore() {
-      this.pageCount += 1
-      this.loading = true
-      await this.searchQuery()
-    },
-    manualSuggestionCompleted() {
-      this.manualSuggestionActive = false
-      this.suggestionCompletePopupActive = true
-    },
-    suggestionPopupClosed() {
-      this.suggestionCompletePopupActive = false
-    },
-    manualSuggestion() {
-      this.manualSuggestionActive = true
-    },
-    suggestionCompleted() {
-      this.suggestionCompletePopupActive = true
-    },
-    manualSuggestionPopupClosed() {
-      this.manualSuggestionActive = false
-    },
-  },
+  } catch (e) {
+    console.error('Search error:', e)
+    // handle error
+  } finally {
+    loading.value = false
+    btnState.value = 'initial'
+  }
+}
+
+async function loadMore() {
+  suggestStore.setPageCount(pageCount.value + 1)
+  loadMoreBtnState.value = 'loading'
+  await searchQuery()
+  loadMoreBtnState.value = 'initial'
+}
+
+function manualSuggestionCompleted() {
+  manualSuggestionActive.value = false
+  suggestionCompletePopupActive.value = true
+}
+function suggestionPopupClosed() {
+  suggestionCompletePopupActive.value = false
+}
+function manualSuggestion() {
+  manualSuggestionActive.value = true
+}
+function suggestionCompleted() {
+  suggestionCompletePopupActive.value = true
+}
+function manualSuggestionPopupClosed() {
+  manualSuggestionActive.value = false
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="page-wrapper">
       <div class="image-container">
         <img
-          src="~assets/img/login-illustration.png"
+          src="assets/img/login-illustration.png"
           alt="3d Man with computer on hand"
         />
       </div>
@@ -21,7 +21,7 @@
               :state="state.email"
               :hasFeedback="true"
               :feedback="feedbacks.email"
-              v-bind:value.sync="loginCredentials.email"
+              v-model="loginCredentials.email"
             />
             <Input
               type="password"
@@ -35,7 +35,7 @@
               :state="state.password"
               :hasFeedback="true"
               :feedback="feedbacks.password"
-              v-bind:value.sync="loginCredentials.password"
+              v-model="loginCredentials.password"
             />
             <div class="button-container">
               <Button type="submit" :label="btnLabel" :state="btnState" />
@@ -53,10 +53,10 @@
 <script setup>
 import { ref } from 'vue'
 import { useUsersStore } from '~/stores/users'
-import { useRouter } from 'vue-router'
-
 const usersStore = useUsersStore()
 const router = useRouter()
+
+definePageMeta({ layout: false }) // Remove or change if you want a layout
 
 const loginCredentials = ref({
   email: '',
