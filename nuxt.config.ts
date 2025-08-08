@@ -119,21 +119,100 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
-})
+  sitemap: {
+    sitemapsPathPrefix: '/',
+    sitemapIndexFilename: 'sitemap.xml',
+    sitemaps: {
+      movies: {
+        excludeAppSources: true,
+        urls: async () => {
+          try {
+            const firebaseConfig = {
+              apiKey: process.env.FIREBASE_API_KEY,
+              authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+              projectId: process.env.FIREBASE_PROJECT_ID,
+              storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+              messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+              appId: process.env.FIREBASE_APP_ID,
+            }
 
-export const sitemap = {
-  sitemapsPathPrefix: '/',
-  sitemapIndexFilename: 'sitemap.xml',
-  sitemaps: {
-    pages: {
-      exclude: ['/login', '/admin', '/admin/**'],
-      excludeAppSources: true,
-      urls: async () => [
-        { loc: '/' },
-        { loc: '/movies' },
-        { loc: '/tvshows' },
-        { loc: '/suggest' },
-      ],
+            let firebaseApp
+            const apps = getApps()
+            if (!apps.length) {
+              firebaseApp = initializeApp(firebaseConfig)
+            } else {
+              firebaseApp = apps[0]
+            }
+
+            const db = getFirestore(firebaseApp)
+            const listsSnap = await getDocs(collection(db, 'watchedList'))
+            const urls = []
+
+            listsSnap.docs.forEach((doc) => {
+              const data = doc.data()
+              if (data.media_type === 'movie' && data.id) {
+                urls.push({ loc: `/movie/${data.id}` })
+              }
+            })
+
+            console.log('Movies sitemap generated:', urls.length, 'URLs')
+            return urls
+          } catch (error) {
+            console.error('Error generating movies sitemap:', error)
+            return []
+          }
+        },
+      },
+      tvshows: {
+        excludeAppSources: true,
+        urls: async () => {
+          try {
+            const firebaseConfig = {
+              apiKey: process.env.FIREBASE_API_KEY,
+              authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+              projectId: process.env.FIREBASE_PROJECT_ID,
+              storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+              messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+              appId: process.env.FIREBASE_APP_ID,
+            }
+
+            let firebaseApp
+            const apps = getApps()
+            if (!apps.length) {
+              firebaseApp = initializeApp(firebaseConfig)
+            } else {
+              firebaseApp = apps[0]
+            }
+
+            const db = getFirestore(firebaseApp)
+            const listsSnap = await getDocs(collection(db, 'watchedList'))
+            const urls = []
+
+            listsSnap.docs.forEach((doc) => {
+              const data = doc.data()
+              if (data.media_type === 'tv' && data.id) {
+                urls.push({ loc: `/tv/${data.id}` })
+              }
+            })
+
+            console.log('TV Shows sitemap generated:', urls.length, 'URLs')
+            return urls
+          } catch (error) {
+            console.error('Error generating TV shows sitemap:', error)
+            return []
+          }
+        },
+      },
+      pages: {
+        exclude: ['/login', '/admin', '/admin/**'],
+        excludeAppSources: true,
+        urls: async () => [
+          { loc: '/' },
+          { loc: '/movies' },
+          { loc: '/tvshows' },
+          { loc: '/suggest' },
+        ],
+      },
     },
   },
-}
+})
